@@ -57,7 +57,7 @@ export default function LandingPage() {
       <section className="relative bg-gradient-to-br from-accent to-accent/90 text-accent-foreground py-16 px-4">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-6 text-balance leading-tight">
-            Descubra os segredos para <span className="text-primary">conquistar sua casa própria</span> através do
+            Descubra os segredos para <span className="text-primary">construção da sua casa própria</span> através do
             financiamento da Caixa
           </h1>
 
@@ -88,7 +88,7 @@ export default function LandingPage() {
               "Cansado de pagar aluguel sem nunca construir patrimônio?",
               "Medo do dono pedir o imóvel de volta a qualquer momento?",
               "Vontade de ter a casa do seu jeito, mas acha que é  MUITO caro e burocrático?",
-              "Insegurança de não ter um bem próprio para chamar de seu?",
+              "Está cansado de dividir parede com vizinhos barulhentos, lidar com falta de privacidade e até discussões por pequenos incômodos?",
             ].map((item, index) => (
               <Card key={index} className="p-6 border-l-4 border-l-destructive">
                 <CardContent className="p-0 flex items-start gap-4">
@@ -155,7 +155,7 @@ export default function LandingPage() {
 
           <div className="grid md:grid-cols-2 gap-6 mb-12">
             {[
-              "Como saber se você já pode financiar sua casa própria",
+              "Como saber se você já pode financiar a construção da sua casa própria?",
               "Quanto realmente precisa dar de entrada",
               "Como ser aprovado pela Caixa, com baixa taxa de financiamento",
               "Os maiores erros que impedem famílias de conquistarem sua casa",
@@ -292,11 +292,11 @@ export default function LandingPage() {
                 </div>
                 <div className="flex justify-between items-center py-3 border-b border-gray-200">
                   <span className="text-gray-700 font-medium">Mini-guia de Melhoria de Score</span>
-                  <span className="font-bold text-gray-800">R$150</span>
+                  <span className="font-bold text-gray-800">R$50</span>
                 </div>
                 <div className="flex justify-between items-center py-3 border-b border-gray-200">
-                  <span className="text-gray-700 font-medium">Material: Como Escolher e comprar o Lote Certo</span>
-                  <span className="font-bold text-gray-800">R$50</span>
+                  <span className="text-gray-700 font-medium">Aula Bônus: Como Escolher e comprar o Lote Certo</span>
+                  <span className="font-bold text-gray-800">R$150</span>
                 </div>
               </div>
 
@@ -326,26 +326,59 @@ export default function LandingPage() {
       </section>
 
       {/* Escassez e Urgência */}
-      <section className="py-16 px-4 text-primary-foreground bg-white">
-        <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">Últimas 30 vagas restantes ⏰</h2>
-          <p className="text-xl mb-8 text-pretty">
-            As condições especiais e os bônus estarão disponíveis apenas enquanto durarem as últimas vagas. Garanta sua
-            vaga agora antes que acabe a oferta especial.
-          </p>
+<section className="py-16 px-4 bg-white text-primary-foreground">
+  <div className="max-w-3xl mx-auto text-center">
+    <h2 className="text-3xl md:text-4xl font-bold mb-6">
+      🕒 ATENÇÃO: Janela inédita pode fechar a qualquer momento!
+    </h2>
 
-          <div className="bg-primary text-primary-foreground p-6 rounded-lg mb-8">
-            <div className="text-2xl font-bold mb-2">Restam apenas:</div>
-            <VagasCounter />
-            <div className="text-sm font-bold">Vagas disponíveis</div>
-          </div>
+    {/* Contexto atual (urgência) */}
+    <div className="space-y-4 text-xl text-pretty mb-8">
+      <p>
+        Em 2025, o <strong>Minha Casa Minha Vida</strong> lançou a <strong>Faixa 4</strong>, voltada para famílias com
+        renda entre <strong>R$ 8 mil e R$ 12 mil por mês</strong>.
+      </p>
+      <p>
+        👉 É a primeira vez que a classe média pode financiar a <strong>construção da casa</strong> com
+        <strong> juros reduzidos</strong> e <strong>condições especiais</strong>, mesmo fora das faixas populares.
+      </p>
+      <p>
+        💡 E o melhor: você pode usar seu <strong>FGTS</strong>, financiar <strong>terreno e obra no mesmo contrato</strong>,
+        com o suporte técnico certo.
+      </p>
+      <p>
+        🚨 <strong>Mas vale o alerta:</strong> esse tipo de condição <strong>não costuma durar muito</strong>. A Caixa muda as
+        regras com frequência — e quem não entende o momento, perde a chance de construir com
+        <strong> economia e segurança</strong>.
+      </p>
+    </div>
 
-          <CTAButton>
-            <ArrowRight className="mr-2 h-5 w-5" />
-            QUERO MINHA CASA PRÓPRIA
-          </CTAButton>
-        </div>
-      </section>
+    {/* Selo de escassez / aviso de vagas */}
+    <div className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wide mb-6">
+      <span className="rounded-full bg-primary/10 text-primary px-3 py-1">Vagas limitadas</span>
+      <span className="rounded-full bg-primary/10 text-primary px-3 py-1">Oferta por tempo limitado</span>
+    </div>
+
+    {/* Bloco de contagem de vagas */}
+    <div className="bg-primary text-primary-foreground p-6 rounded-lg mb-8">
+      <div className="text-2xl font-bold mb-2">Restam apenas:</div>
+      <VagasCounter />
+      <div className="text-sm font-bold">Vagas disponíveis</div>
+    </div>
+
+    {/* Reforço final + CTA */}
+    <p className="text-base md:text-lg text-muted-foreground mb-6">
+      Na imersão <strong>“O Segredo da Construção Financiada”</strong>, você vai entender como a nova faixa funciona para
+      quem quer construir, o passo a passo para aproveitar o crédito com estratégia e por que <strong>esta pode ser a melhor hora</strong> para sair do aluguel.
+    </p>
+
+    <CTAButton aria-label="Garantir minha vaga por R$47">
+      <ArrowRight className="mr-2 h-5 w-5" />
+      QUERO GARANTIR MINHA VAGA POR R$47
+    </CTAButton>
+  </div>
+</section>
+
 
       {/* FAQ */}
       <section className="py-16 px-4 bg-muted/30">
@@ -372,6 +405,10 @@ export default function LandingPage() {
               {
                 question: "Posso assistir do celular?",
                 answer: "Claro! A aula pode ser assistida de qualquer dispositivo com acesso à internet.",
+              },
+              {
+                question: "Preciso já ter um lote para conseguir financiar a construção da minha casa?",
+                answer: "Não!  Ter o lote não é um pré-requisito. A Caixa tem uma modalidade de financiamento exclusiva para isso, você pode dar entrada no financiamento mesmo sem o terreno comprado ainda. Durante a aula, vamos te todos mostrar os caminhos possíveis. Assim, você já se prepara para dar o próximo passo com segurança",
               },
             ].map((faq, index) => (
               <Card key={index} className="p-6">
