@@ -57,7 +57,7 @@ export default function LandingPage() {
       <section className="relative bg-gradient-to-br from-accent to-accent/90 text-accent-foreground py-16 px-4">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-6 text-balance leading-tight">
-            Descubra os segredos para <span className="text-primary">construção da sua casa própria</span> através do
+            Descubra os segredos para <span className="text-primary">construir sua casa própria</span> através do
             financiamento da Caixa
           </h1>
 
