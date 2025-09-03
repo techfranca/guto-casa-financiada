@@ -4,7 +4,7 @@ import type React from "react"
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { CheckCircle, XCircle, ArrowRight } from "lucide-react"
+import { CheckCircle, XCircle } from "lucide-react"
 import { ProjectCarousel } from "@/components/project-carousel"
 
 const CTAButton = ({
@@ -48,7 +48,7 @@ const VagasCounter = () => {
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background overflow-x-hidden">
       <div className="bg-primary text-primary-foreground py-3 px-4 text-center font-bold text-lg">
         AULA AO VIVO DIA: 29/09 às 19h30
       </div>
@@ -62,8 +62,8 @@ export default function LandingPage() {
           </h1>
 
           <p className="text-xl md:text-2xl mb-8 text-accent-foreground/90 text-pretty max-w-3xl mx-auto">
-            Na quarta edição da aula "Os segredos da construção financiada",o Engenheiro credenciado pela Caixa, te mostrará exatamente TUDO o que você precisa para sair
-            do aluguel e conquistar a sua casa dos sonhos.
+            Na quarta edição da aula "Os segredos da construção financiada",o Engenheiro credenciado pela Caixa, te
+            mostrará exatamente TUDO o que você precisa para sair do aluguel e conquistar a sua casa dos sonhos.
           </p>
 
           <CTAButton className="mb-8">QUERO MINHA CASA PRÓPRIA</CTAButton>
@@ -120,8 +120,8 @@ export default function LandingPage() {
             />
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">Quem vai te ensinar</h2>
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Guto, o Engenheiro credenciado e especialista em financiamento pela Caixa, com mais de 6 anos de experiência ajudando
-              famílias a realizarem o sonho da casa própria.
+              Guto, o Engenheiro credenciado e especialista em financiamento pela Caixa, com mais de 6 anos de
+              experiência ajudando famílias a realizarem o sonho da casa própria.
             </p>
           </div>
 
@@ -155,7 +155,7 @@ export default function LandingPage() {
 
           <div className="grid md:grid-cols-2 gap-6 mb-12">
             {[
-              "Como saber se você já pode financiar a construção da sua casa própria?",
+              "Como saber se você já pode financiar a construção da sua casa própria",
               "Quanto realmente precisa dar de entrada",
               "Como ser aprovado pela Caixa, com baixa taxa de financiamento",
               "Os maiores erros que impedem famílias de conquistarem sua casa",
@@ -326,59 +326,47 @@ export default function LandingPage() {
       </section>
 
       {/* Escassez e Urgência */}
-<section className="py-16 px-4 bg-white text-primary-foreground">
-  <div className="max-w-3xl mx-auto text-center">
-    <h2 className="text-3xl md:text-4xl font-bold mb-6">
-      🕒 ATENÇÃO: Janela inédita pode fechar a qualquer momento!
-    </h2>
+      <section className="py-16 px-4 bg-white text-primary-foreground">
+        <div className="max-w-2xl mx-auto text-center">
+          {/* Headline */}
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">
+            🚨 Condições únicas da Caixa podem mudar a qualquer momento!
+          </h2>
 
-    {/* Contexto atual (urgência) */}
-    <div className="space-y-4 text-xl text-pretty mb-8">
-      <p>
-        Em 2025, o <strong>Minha Casa Minha Vida</strong> lançou a <strong>Faixa 4</strong>, voltada para famílias com
-        renda entre <strong>R$ 8 mil e R$ 12 mil por mês</strong>.
-      </p>
-      <p>
-        👉 É a primeira vez que a classe média pode financiar a <strong>construção da casa</strong> com
-        <strong> juros reduzidos</strong> e <strong>condições especiais</strong>, mesmo fora das faixas populares.
-      </p>
-      <p>
-        💡 E o melhor: você pode usar seu <strong>FGTS</strong>, financiar <strong>terreno e obra no mesmo contrato</strong>,
-        com o suporte técnico certo.
-      </p>
-      <p>
-        🚨 <strong>Mas vale o alerta:</strong> esse tipo de condição <strong>não costuma durar muito</strong>. A Caixa muda as
-        regras com frequência — e quem não entende o momento, perde a chance de construir com
-        <strong> economia e segurança</strong>.
-      </p>
-    </div>
+          {/* Contexto enxuto */}
+          <div className="space-y-3 text-lg mb-8">
+            <p>
+              Em 2025, a <strong>Caixa</strong> liberou a <strong>Faixa 4 do MCMV</strong> para famílias com renda de{" "}
+              <strong>R$ 8 a 12 mil</strong>.
+            </p>
+            <p>
+              💡 Isso significa <strong>juros reduzidos</strong> e a chance de usar seu <strong>FGTS</strong> para
+              financiar <strong>terreno + obra</strong> no mesmo contrato.
+            </p>
+            <p className="text-red-600 font-semibold">
+              👉 Mas atenção: a Caixa muda as regras com frequência. Se você adiar, pode acabar pagando{" "}
+              <strong>parcelas bem mais caras</strong>.
+            </p>
+          </div>
 
-    {/* Selo de escassez / aviso de vagas */}
-    <div className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wide mb-6">
-      <span className="rounded-full bg-primary/10 text-primary px-3 py-1">Vagas limitadas</span>
-      <span className="rounded-full bg-primary/10 text-primary px-3 py-1">Oferta por tempo limitado</span>
-    </div>
+          {/* Selos curtos */}
+          <div className="inline-flex flex-wrap justify-center gap-2 text-xs font-semibold uppercase tracking-wide mb-6">
+            <span className="rounded-full bg-primary/10 text-primary px-3 py-1">Taxas reduzidas</span>
+            <span className="rounded-full bg-primary/10 text-primary px-3 py-1">FGTS incluso</span>
+            <span className="rounded-full bg-primary/10 text-primary px-3 py-1">Tempo limitado</span>
+          </div>
 
-    {/* Bloco de contagem de vagas */}
-    <div className="bg-primary text-primary-foreground p-6 rounded-lg mb-8">
-      <div className="text-2xl font-bold mb-2">Restam apenas:</div>
-      <VagasCounter />
-      <div className="text-sm font-bold">Vagas disponíveis</div>
-    </div>
-
-    {/* Reforço final + CTA */}
-    <p className="text-base md:text-lg text-muted-foreground mb-6">
-      Na imersão <strong>“O Segredo da Construção Financiada”</strong>, você vai entender como a nova faixa funciona para
-      quem quer construir, o passo a passo para aproveitar o crédito com estratégia e por que <strong>esta pode ser a melhor hora</strong> para sair do aluguel.
-    </p>
-
-    <CTAButton aria-label="Garantir minha vaga por R$47">
-      <ArrowRight className="mr-2 h-5 w-5" />
-      QUERO GARANTIR MINHA VAGA POR R$47
-    </CTAButton>
-  </div>
-</section>
-
+          {/* CTA */}
+          <a
+            href="https://pay.hotmart.com/T101665306P?checkoutMode=10&bid=1756654894781"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-colors w-full md:w-auto text-center"
+          >
+            QUERO MINHA CASA COM A CAIXA
+          </a>
+        </div>
+      </section>
 
       {/* FAQ */}
       <section className="py-16 px-4 bg-muted/30">
@@ -408,7 +396,8 @@ export default function LandingPage() {
               },
               {
                 question: "Preciso já ter um lote para conseguir financiar a construção da minha casa?",
-                answer: "Não!  Ter o lote não é um pré-requisito. A Caixa tem uma modalidade de financiamento exclusiva para isso, você pode dar entrada no financiamento mesmo sem o terreno comprado ainda. Durante a aula, vamos te todos mostrar os caminhos possíveis. Assim, você já se prepara para dar o próximo passo com segurança",
+                answer:
+                  "Não!  Ter o lote não é um pré-requisito. A Caixa tem uma modalidade de financiamento exclusiva para isso, você pode dar entrada no financiamento mesmo sem o terreno comprado ainda. Durante a aula, vamos te todos mostrar os caminhos possíveis. Assim, você já se prepara para dar o próximo passo com segurança",
               },
             ].map((faq, index) => (
               <Card key={index} className="p-6">

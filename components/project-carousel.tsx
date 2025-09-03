@@ -45,7 +45,7 @@ export function ProjectCarousel() {
   }
 
   return (
-    <div className="relative max-w-2xl mx-auto">
+    <div className="relative max-w-2xl mx-auto px-4">
       <div className="relative overflow-hidden rounded-xl shadow-2xl">
         <div
           className="flex transition-transform duration-500 ease-in-out"
@@ -54,7 +54,7 @@ export function ProjectCarousel() {
           {projects.map((project) => (
             <div
               key={project.id}
-              className="w-full flex-shrink-0 relative aspect-[9/16] h-[600px] sm:h-[700px] md:h-[800px] lg:h-[900px]"
+              className="w-full flex-shrink-0 relative aspect-[9/16] h-[400px] sm:h-[500px] md:h-[600px] max-h-[70vh]"
             >
               <img
                 src={project.image || "/placeholder.svg"}
