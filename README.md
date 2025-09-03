@@ -12,7 +12,7 @@ Any changes you make to your deployed app will be automatically pushed to this r
 
 ## Deployment
 
-Your project is live at:
+Your project is live at:.
 
 **[https://vercel.com/contato-3393s-projects/v0-webinar-landing-page](https://vercel.com/contato-3393s-projects/v0-webinar-landing-page)**
 
