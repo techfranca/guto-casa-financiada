@@ -179,31 +179,55 @@ export default function LandingPage() {
       {/* Depoimentos */}
       <section className="py-16 px-4 bg-muted/30">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-foreground">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4 text-foreground">
             Veja o que nossos alunos estão falando
           </h2>
+
+          <div className="flex justify-center items-center mb-12">
+            <div className="bg-white rounded-full px-4 py-2 shadow-sm border border-gray-200 flex items-center gap-2">
+              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                  fill="#4285F4"
+                />
+                <path
+                  d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                  fill="#34A853"
+                />
+                <path
+                  d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+                  fill="#FBBC05"
+                />
+                <path
+                  d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+                  fill="#EA4335"
+                />
+              </svg>
+              <span className="text-sm text-gray-600 font-medium">Avaliações Google</span>
+            </div>
+          </div>
 
           <div className="grid md:grid-cols-2 gap-6 mb-12">
             {[
               {
-                name: "Maria Santos",
-                image: "/testimonial-1.svg",
-                text: "Consegui financiar minha casa em apenas 3 meses! O Guto me ensinou exatamente o que fazer para ser aprovada pela Caixa. Hoje tenho minha casa própria!",
+                name: "Martinho Egg",
+                image: "/martinho-egg.png",
+                text: "Ótimo engenheiro. Sempre disponível para tirar as dúvidas, visita a obra, têm compromisso como se a obra é dele e ajuda com ideias inovadoras. Continue com o ótimo trabalho Guto.",
               },
               {
-                name: "Bruna Carvalho",
-                image: "/testimonial-2.svg",
-                text: "Estava pagando aluguel há 10 anos. Depois da aula do Guto, descobri que podia financiar por um valor super acessível. Hoje moro na minha casa própria!",
+                name: "Paula Vieira",
+                image: "/paula-vieira.png",
+                text: "Engenheiro com senso de dono em todas as fases de um projeto, engajado, comprometido e inovador. Ele sonha junto com o cliente até a concretização!",
               },
               {
-                name: "Carlos Oliveira",
-                image: "/testimonial-4.svg",
-                text: "Construí minha casa de 180m² financiada pela Caixa. O método do Guto funciona mesmo! Economizei mais de R$50.000 no processo.",
+                name: "Lucas Faria",
+                image: "/lucas-faria.png",
+                text: "O Engenheiro Empreendedor é o profissional referência no mercado de construção civil da cidade de Conselheiro Lafaiete e região! Nesse você pode confiar!",
               },
               {
-                name: "Karla Ferreira",
-                image: "/testimonial-6.svg",
-                text: "Pensei que precisava de muito dinheiro guardado. Descobri que era muito mais barato do que eu imaginava. Melhor investimento que fiz na minha vida!",
+                name: "Hilton Costa",
+                image: "/hilton-costa.png",
+                text: "Excelente profissional!! Dedicado, focado e pronto para atender as mais diversas necessidades de seus clientes!",
               },
             ].map((testimonial, index) => (
               <Card
@@ -325,48 +349,48 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Escassez e Urgência */}
-      <section className="py-16 px-4 bg-white text-primary-foreground">
-        <div className="max-w-2xl mx-auto text-center">
-          {/* Headline */}
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            🚨 Condições únicas da Caixa podem mudar a qualquer momento!
-          </h2>
+{/* Escassez e Urgência */}
+<section className="py-16 px-4 bg-white text-primary-foreground">
+  <div className="max-w-3xl mx-auto text-center">
+    {/* Headline */}
+    <h2 className="text-3xl md:text-4xl font-bold mb-8">
+      🕒 ATENÇÃO: A Caixa abriu uma janela inédita para quem quer construir. E ela pode fechar a qualquer momento.
+    </h2>
 
-          {/* Contexto enxuto */}
-          <div className="space-y-3 text-lg mb-8">
-            <p>
-              Em 2025, a <strong>Caixa</strong> liberou a <strong>Faixa 4 do MCMV</strong> para famílias com renda de{" "}
-              <strong>R$ 8 a 12 mil</strong>.
-            </p>
-            <p>
-              💡 Isso significa <strong>juros reduzidos</strong> e a chance de usar seu <strong>FGTS</strong> para
-              financiar <strong>terreno + obra</strong> no mesmo contrato.
-            </p>
-            <p className="text-red-600 font-semibold">
-              👉 Mas atenção: a Caixa muda as regras com frequência. Se você adiar, pode acabar pagando{" "}
-              <strong>parcelas bem mais caras</strong>.
-            </p>
-          </div>
+    {/* Contexto Detalhado */}
+    <div className="space-y-4 text-lg text-left md:text-center text-gray-700 mb-8">
+      <p>
+        Em 2025, o Minha Casa Minha Vida lançou a <strong>Faixa 4</strong>, voltada para famílias com renda entre <strong>R$ 8 mil e R$ 12 mil</strong> por mês.
+      </p>
+      <p>
+        👉 É a <strong>primeira vez</strong> que a classe média pode financiar a construção da casa com <strong>juros reduzidos</strong> e condições especiais, mesmo fora das faixas populares.
+      </p>
+      <p>
+        💡 E o melhor: você pode usar seu <strong>FGTS</strong>, financiar o <strong>terreno e a obra no mesmo contrato</strong>, com o suporte técnico certo.
+      </p>
+      <p className="font-semibold text-red-600">
+        🚨 Mas vale o alerta: esse tipo de condição não costuma durar muito. A Caixa muda as regras com frequência — e quem não entende o momento, perde a chance de construir com economia e segurança.
+      </p>
+    </div>
 
-          {/* Selos curtos */}
-          <div className="inline-flex flex-wrap justify-center gap-2 text-xs font-semibold uppercase tracking-wide mb-6">
-            <span className="rounded-full bg-primary/10 text-primary px-3 py-1">Taxas reduzidas</span>
-            <span className="rounded-full bg-primary/10 text-primary px-3 py-1">FGTS incluso</span>
-            <span className="rounded-full bg-primary/10 text-primary px-3 py-1">Tempo limitado</span>
-          </div>
+    {/* Conexão com a Solução (ESTILO MELHORADO) */}
+    <div className="bg-green-50 border-l-4 border-green-500 rounded-lg p-6 mb-8">
+      <p className="text-lg text-green-900">
+        Na imersão <strong>“O Segredo da Construção Financiada”</strong>, você vai entender como essa nova faixa funciona para quem quer construir, o passo a passo para aproveitar o crédito com estratégia e por que essa pode ser a <strong>melhor hora para sair do aluguel</strong>.
+      </p>
+    </div>
 
-          {/* CTA */}
-          <a
-            href="https://pay.hotmart.com/T101665306P?checkoutMode=10&bid=1756654894781"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-colors w-full md:w-auto text-center"
-          >
-            QUERO MINHA CASA COM A CAIXA
-          </a>
-        </div>
-      </section>
+    {/* CTA */}
+    <a
+      href="https://pay.hotmart.com/T101665306P?checkoutMode=10&bid=1756654894781"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="inline-block bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-colors w-full md:w-auto text-center"
+    >
+      QUERO APROVEITAR ESSA CHANCE
+    </a>
+  </div>
+</section>
 
       {/* FAQ */}
       <section className="py-16 px-4 bg-muted/30">
