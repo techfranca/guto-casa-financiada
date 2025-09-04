@@ -62,7 +62,7 @@ export default function LandingPage() {
           </h1>
 
           <p className="text-xl md:text-2xl mb-8 text-accent-foreground/90 text-pretty max-w-3xl mx-auto">
-            Na quarta edição da aula "Os segredos da construção financiada",o Engenheiro credenciado pela Caixa, te
+            Na quarta edição da aula "Os segredos da construção financiada", o Engenheiro credenciado pela Caixa, te
             mostrará exatamente TUDO o que você precisa para sair do aluguel e conquistar a sua casa dos sonhos.
           </p>
 
@@ -210,9 +210,9 @@ export default function LandingPage() {
           <div className="grid md:grid-cols-2 gap-6 mb-12">
             {[
               {
-                name: "Martinho Egg",
-                image: "/martinho-egg.png",
-                text: "Ótimo engenheiro. Sempre disponível para tirar as dúvidas, visita a obra, têm compromisso como se a obra é dele e ajuda com ideias inovadoras. Continue com o ótimo trabalho Guto.",
+                name: "Iuri Maximiano",
+                image: "/iuri-maximiano.jpeg",
+                text: "Muito conhecimento e metas traçadas! Em apenas uma tarde ",
               },
               {
                 name: "Paula Vieira",
@@ -220,9 +220,9 @@ export default function LandingPage() {
                 text: "Engenheiro com senso de dono em todas as fases de um projeto, engajado, comprometido e inovador. Ele sonha junto com o cliente até a concretização!",
               },
               {
-                name: "Lucas Faria",
-                image: "/lucas-faria.png",
-                text: "O Engenheiro Empreendedor é o profissional referência no mercado de construção civil da cidade de Conselheiro Lafaiete e região! Nesse você pode confiar!",
+                name: "Merly Goulart",
+                image: "/merly-goulart.jpeg",
+                text: "Ótimo evento. Esclarecedor para montar o plano da obra.",
               },
               {
                 name: "Hilton Costa",
@@ -349,48 +349,58 @@ export default function LandingPage() {
         </div>
       </section>
 
-{/* Escassez e Urgência */}
-<section className="py-16 px-4 bg-white text-primary-foreground">
-  <div className="max-w-3xl mx-auto text-center">
-    {/* Headline */}
-    <h2 className="text-3xl md:text-4xl font-bold mb-8">
-      🕒 ATENÇÃO: A Caixa abriu uma janela inédita para quem quer construir. E ela pode fechar a qualquer momento.
-    </h2>
+      {/* Escassez e Urgência */}
+      <section className="py-16 px-4 bg-white text-primary-foreground">
+        <div className="max-w-3xl mx-auto text-center">
+          {/* Headline */}
+          <h2 className="text-3xl md:text-4xl font-bold mb-8">
+            🕒 ATENÇÃO: A Caixa abriu uma janela inédita para quem quer construir. E ela pode fechar a qualquer momento.
+          </h2>
 
-    {/* Contexto Detalhado */}
-    <div className="space-y-4 text-lg text-left md:text-center text-gray-700 mb-8">
-      <p>
-        Em 2025, o Minha Casa Minha Vida lançou a <strong>Faixa 4</strong>, voltada para famílias com renda entre <strong>R$ 8 mil e R$ 12 mil</strong> por mês.
-      </p>
-      <p>
-        👉 É a <strong>primeira vez</strong> que a classe média pode financiar a construção da casa com <strong>juros reduzidos</strong> e condições especiais, mesmo fora das faixas populares.
-      </p>
-      <p>
-        💡 E o melhor: você pode usar seu <strong>FGTS</strong>, financiar o <strong>terreno e a obra no mesmo contrato</strong>, com o suporte técnico certo.
-      </p>
-      <p className="font-semibold text-red-600">
-        🚨 Mas vale o alerta: esse tipo de condição não costuma durar muito. A Caixa muda as regras com frequência — e quem não entende o momento, perde a chance de construir com economia e segurança.
-      </p>
-    </div>
+          {/* Contexto Detalhado */}
+          <div className="space-y-4 text-lg text-left md:text-center text-gray-700 mb-8">
+            <p>
+              Em 2025, o Minha Casa Minha Vida lançou a <strong>Faixa 4</strong>, voltada para famílias com renda entre{" "}
+              <strong>R$ 8 mil e R$ 12 mil</strong> por mês.
+            </p>
+            <p>
+              👉 É a <strong>primeira vez</strong> que a classe média pode financiar a construção da casa com{" "}
+              <strong>juros reduzidos</strong> e condições especiais, mesmo fora das faixas populares.
+            </p>
+            <p>
+              💡 E o melhor: você pode usar seu <strong>FGTS</strong>, financiar o{" "}
+              <strong>terreno e a obra no mesmo contrato</strong>, com o suporte técnico certo.
+            </p>
+          </div>
 
-    {/* Conexão com a Solução (ESTILO MELHORADO) */}
-    <div className="bg-green-50 border-l-4 border-green-500 rounded-lg p-6 mb-8">
-      <p className="text-lg text-green-900">
-        Na imersão <strong>“O Segredo da Construção Financiada”</strong>, você vai entender como essa nova faixa funciona para quem quer construir, o passo a passo para aproveitar o crédito com estratégia e por que essa pode ser a <strong>melhor hora para sair do aluguel</strong>.
-      </p>
-    </div>
+          {/* Conexão com a Solução (ESTILO MELHORADO) */}
+          <div className="bg-green-50 border-l-4 border-green-500 rounded-lg p-6 mb-8">
+            <p className="text-lg text-green-900">
+              Na imersão <strong>"O Segredo da Construção Financiada"</strong>, você vai entender como essa nova faixa
+              funciona para quem quer construir, o passo a passo para aproveitar o crédito com estratégia e por que essa
+              pode ser a <strong>melhor hora para sair do aluguel</strong>.
+            </p>
+          </div>
 
-    {/* CTA */}
-    <a
-      href="https://pay.hotmart.com/T101665306P?checkoutMode=10&bid=1756654894781"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="inline-block bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-colors w-full md:w-auto text-center"
-    >
-      QUERO APROVEITAR ESSA CHANCE
-    </a>
-  </div>
-</section>
+          {/* Mensagem vermelha */}
+          <div className="mb-8">
+            <p className="font-semibold text-red-600 text-lg">
+              🚨 Mas vale o alerta: esse tipo de condição não costuma durar muito. A Caixa muda as regras com frequência
+              — e quem não entende o momento, perde a chance de construir com economia e segurança.
+            </p>
+          </div>
+
+          {/* CTA */}
+          <a
+            href="https://pay.hotmart.com/T101665306P?checkoutMode=10&bid=1756654894781"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-colors w-full md:w-auto text-center"
+          >
+            QUERO APROVEITAR ESSA CHANCE
+          </a>
+        </div>
+      </section>
 
       {/* FAQ */}
       <section className="py-16 px-4 bg-muted/30">
@@ -421,7 +431,7 @@ export default function LandingPage() {
               {
                 question: "Preciso já ter um lote para conseguir financiar a construção da minha casa?",
                 answer:
-                  "Não!  Ter o lote não é um pré-requisito. A Caixa tem uma modalidade de financiamento exclusiva para isso, você pode dar entrada no financiamento mesmo sem o terreno comprado ainda. Durante a aula, vamos te todos mostrar os caminhos possíveis. Assim, você já se prepara para dar o próximo passo com segurança",
+                  "Não! Ter o lote não é um pré-requisito. A Caixa tem uma modalidade de financiamento exclusiva para isso, você pode dar entrada no financiamento mesmo sem o terreno comprado ainda. Durante a aula, vamos te todos mostrar os caminhos possíveis. Assim, você já se prepara para dar o próximo passo com segurança",
               },
             ].map((faq, index) => (
               <Card key={index} className="p-6">
