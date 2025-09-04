@@ -46,28 +46,19 @@ export function ProjectCarousel() {
 
   return (
     <div className="relative max-w-2xl mx-auto px-4">
-      <div
-        className="relative overflow-hidden rounded-xl shadow-2xl w-full max-w-[540px] mx-auto"
-        style={{ aspectRatio: "9/16", height: "960px" }}
-      >
+      <div className="relative overflow-hidden rounded-xl shadow-2xl w-full max-w-[300px] sm:max-w-[400px] md:max-w-[540px] mx-auto aspect-[9/16]">
         <div
           className="flex transition-transform duration-500 ease-in-out"
           style={{ transform: `translateX(-${currentIndex * 100}%)` }}
         >
           {projects.map((project) => (
-            <div
-              key={project.id}
-              className="w-full flex-shrink-0 relative aspect-[9/16] h-[540px] sm:h-[640px] md:h-[720px] lg:h-[960px]"
-            >
+            <div key={project.id} className="w-full flex-shrink-0 relative aspect-[9/16]">
               <img
                 src={project.image || "/placeholder.svg"}
                 alt={project.title}
                 className="w-full h-full object-cover"
               />
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
-                
-                
-              </div>
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6"></div>
             </div>
           ))}
         </div>
@@ -76,7 +67,7 @@ export function ProjectCarousel() {
         <Button
           variant="outline"
           size="icon"
-          className="absolute left-4 top-1/2 -translate-y-1/2 bg-primary hover:bg-primary/90 border-0 shadow-lg text-black"
+          className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 bg-primary hover:bg-primary/90 border-0 shadow-lg text-black z-10"
           onClick={goToPrevious}
         >
           <ChevronLeft className="h-4 w-4" />
@@ -85,7 +76,7 @@ export function ProjectCarousel() {
         <Button
           variant="outline"
           size="icon"
-          className="absolute right-4 top-1/2 -translate-y-1/2 bg-primary hover:bg-primary/90 border-0 shadow-lg text-black"
+          className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 bg-primary hover:bg-primary/90 border-0 shadow-lg text-black z-10"
           onClick={goToNext}
         >
           <ChevronRight className="h-4 w-4" />
@@ -93,12 +84,12 @@ export function ProjectCarousel() {
       </div>
 
       {/* Dots Indicator */}
-      <div className="flex justify-center mt-4 space-x-2">
+      <div className="flex justify-center mt-4 space-x-2 relative z-10">
         {projects.map((_, index) => (
           <button
             key={index}
             className={`w-3 h-3 rounded-full transition-colors ${
-              index === currentIndex ? "bg-primary" : "bg-white/50"
+              index === currentIndex ? "bg-primary" : "bg-gray-400"
             }`}
             onClick={() => setCurrentIndex(index)}
           />

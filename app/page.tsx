@@ -54,14 +54,20 @@ export default function LandingPage() {
       </div>
 
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-accent to-accent/90 text-accent-foreground py-16 px-4">
+      <section
+        className="relative py-16 px-4 bg-[rgba(15,19,28,1)]"
+        style={{
+          background: "linear-gradient(135deg, #081534 0%, rgba(8, 21, 52, 0.9) 100%)",
+          color: "#ffffff",
+        }}
+      >
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 text-balance leading-tight">
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 text-balance leading-tight text-white">
             Descubra os segredos para <span className="text-primary">construir sua casa própria</span> através do
             financiamento da Caixa
           </h1>
 
-          <p className="text-xl md:text-2xl mb-8 text-accent-foreground/90 text-pretty max-w-3xl mx-auto">
+          <p className="text-xl md:text-2xl mb-8 text-white/90 text-pretty max-w-3xl mx-auto">
             Na quarta edição da aula "Os segredos da construção financiada", o Engenheiro credenciado pela Caixa, te
             mostrará exatamente TUDO o que você precisa para sair do aluguel e conquistar a sua casa dos sonhos.
           </p>
@@ -70,7 +76,14 @@ export default function LandingPage() {
 
           <ProjectCarousel />
 
-          <p className="mt-6 text-accent-foreground/80 text-lg font-semibold">
+          <p
+            className="mt-6 text-lg font-semibold px-4 py-2 rounded-lg inline-block"
+            style={{
+              color: "#ffffff",
+              backgroundColor: "rgba(8, 21, 52, 0.8)",
+              border: "1px solid rgba(255, 255, 255, 0.2)",
+            }}
+          >
             ✨ Projetos reais financiados e construídos com sucesso
           </p>
         </div>
@@ -376,9 +389,9 @@ export default function LandingPage() {
           {/* Conexão com a Solução (ESTILO MELHORADO) */}
           <div className="bg-green-50 border-l-4 border-green-500 rounded-lg p-6 mb-8">
             <p className="text-lg text-green-900">
-              Na imersão <strong>&quot;Os Segredos da Construção Financiada&quot;</strong>, você vai entender como essa nova faixa
-              funciona para quem quer construir, o passo a passo para aproveitar o crédito com estratégia e por que essa
-              pode ser a <strong>melhor hora para sair do aluguel</strong>.
+              Na imersão <strong>&quot;Os Segredos da Construção Financiada&quot;</strong>, você vai entender como essa
+              nova faixa funciona para quem quer construir, o passo a passo para aproveitar o crédito com estratégia e
+              por que essa pode ser a <strong>melhor hora para sair do aluguel</strong>.
             </p>
           </div>
 
@@ -404,7 +417,7 @@ export default function LandingPage() {
 
       {/* FAQ */}
       <section className="py-16 px-4 bg-muted/30">
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-foreground">Perguntas Frequentes</h2>
 
           <div className="space-y-6 mb-12">
