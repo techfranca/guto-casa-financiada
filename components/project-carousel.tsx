@@ -46,7 +46,10 @@ export function ProjectCarousel() {
 
   return (
     <div className="relative max-w-2xl mx-auto px-4">
-      <div className="relative overflow-hidden rounded-xl shadow-2xl">
+      <div
+        className="relative overflow-hidden rounded-xl shadow-2xl w-full max-w-[540px] mx-auto"
+        style={{ aspectRatio: "9/16", height: "960px" }}
+      >
         <div
           className="flex transition-transform duration-500 ease-in-out"
           style={{ transform: `translateX(-${currentIndex * 100}%)` }}
@@ -54,7 +57,7 @@ export function ProjectCarousel() {
           {projects.map((project) => (
             <div
               key={project.id}
-              className="w-full flex-shrink-0 relative aspect-[9/16] h-[400px] sm:h-[500px] md:h-[600px] max-h-[70vh]"
+              className="w-full flex-shrink-0 relative aspect-[9/16] h-[540px] sm:h-[640px] md:h-[720px] lg:h-[960px]"
             >
               <img
                 src={project.image || "/placeholder.svg"}
@@ -63,7 +66,7 @@ export function ProjectCarousel() {
               />
               <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
                 <h3 className="text-white text-xl font-bold mb-2">{project.title}</h3>
-                <p className="text-green-400 text-lg font-semibold">{project.subtitle}</p>
+                <p className="text-white text-sm">{project.subtitle}</p>
               </div>
             </div>
           ))}

@@ -120,7 +120,7 @@ export default function LandingPage() {
             />
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">Quem vai te ensinar</h2>
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Guto, o Engenheiro credenciado e especialista em financiamento pela Caixa, com mais de 6 anos de
+              Guto, o Engenheiro credenciado e especialista em financiamento pela Caixa, com mais de 7 anos de
               experiência ajudando famílias a realizarem o sonho da casa própria.
             </p>
           </div>
@@ -376,7 +376,7 @@ export default function LandingPage() {
           {/* Conexão com a Solução (ESTILO MELHORADO) */}
           <div className="bg-green-50 border-l-4 border-green-500 rounded-lg p-6 mb-8">
             <p className="text-lg text-green-900">
-              Na imersão <strong>"O Segredo da Construção Financiada"</strong>, você vai entender como essa nova faixa
+              Na imersão <strong>&quot;Os Segredos da Construção Financiada&quot;</strong>, você vai entender como essa nova faixa
               funciona para quem quer construir, o passo a passo para aproveitar o crédito com estratégia e por que essa
               pode ser a <strong>melhor hora para sair do aluguel</strong>.
             </p>
@@ -431,7 +431,7 @@ export default function LandingPage() {
               {
                 question: "Preciso já ter um lote para conseguir financiar a construção da minha casa?",
                 answer:
-                  "Não! Ter o lote não é um pré-requisito. A Caixa tem uma modalidade de financiamento exclusiva para isso, você pode dar entrada no financiamento mesmo sem o terreno comprado ainda. Durante a aula, vamos te todos mostrar os caminhos possíveis. Assim, você já se prepara para dar o próximo passo com segurança",
+                  "Não! Ter o lote não é um pré-requisito. A Caixa tem uma modalidade de financiamento exclusiva para isso, você pode financiar a compra de lote mais a construção no mesmo contrato — com a mesma taxa, mesma análise e um só processo. Durante a aula, vamos te todos mostrar os caminhos possíveis. Assim, você já se prepara para dar o próximo passo com segurança",
               },
             ].map((faq, index) => (
               <Card key={index} className="p-6">
