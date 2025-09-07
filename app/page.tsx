@@ -54,20 +54,14 @@ export default function LandingPage() {
       </div>
 
       {/* Hero Section */}
-      <section
-        className="relative py-16 px-4 bg-[rgba(15,19,28,1)]"
-        style={{
-          background: "linear-gradient(135deg, #081534 0%, rgba(8, 21, 52, 0.9) 100%)",
-          color: "#ffffff",
-        }}
-      >
+      <section className="relative py-16 px-4 bg-slate-900">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-6 text-balance leading-tight text-white">
-            Descubra os segredos para <span className="text-primary">construir sua casa própria</span> através do
+            Descubra os segredos para <span className="text-green-400">construir sua casa própria</span> através do
             financiamento da Caixa
           </h1>
 
-          <p className="text-xl md:text-2xl mb-8 text-white/90 text-pretty max-w-3xl mx-auto">
+          <p className="text-xl md:text-2xl mb-8 text-gray-100 text-pretty max-w-3xl mx-auto">
             Na quarta edição da aula "Os segredos da construção financiada", o Engenheiro credenciado pela Caixa, te
             mostrará exatamente TUDO o que você precisa para sair do aluguel e conquistar a sua casa dos sonhos.
           </p>
@@ -76,14 +70,7 @@ export default function LandingPage() {
 
           <ProjectCarousel />
 
-          <p
-            className="mt-6 text-lg font-semibold px-4 py-2 rounded-lg inline-block"
-            style={{
-              color: "#ffffff",
-              backgroundColor: "rgba(8, 21, 52, 0.8)",
-              border: "1px solid rgba(255, 255, 255, 0.2)",
-            }}
-          >
+          <p className="mt-6 text-lg font-semibold px-4 py-2 rounded-lg inline-block text-white bg-slate-800 border border-slate-600">
             ✨ Projetos reais financiados e construídos com sucesso
           </p>
         </div>
