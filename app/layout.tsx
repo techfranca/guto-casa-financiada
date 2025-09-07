@@ -19,7 +19,7 @@ const montserrat = Montserrat({
 })
 
 export const metadata: Metadata = {
-  title: "O Segredo da Casa Financiada - Webinário AO VIVO",
+  title: "Os Segredos da Construção Financiada - Aula AO VIVO",
   description:
     "Descubra o passo a passo para conquistar sua casa própria através do financiamento da Caixa – mesmo que hoje pareça impossível.",
   generator: "v0.app",
