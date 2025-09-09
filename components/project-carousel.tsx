@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import Image from "next/image" // Adicionado
 
 const projects = [
   {
@@ -53,10 +54,11 @@ export function ProjectCarousel() {
         >
           {projects.map((project) => (
             <div key={project.id} className="w-full flex-shrink-0 relative aspect-[9/16]">
-              <img
+              <Image // Modificado
                 src={project.image || "/placeholder.svg"}
                 alt={project.title}
-                className="w-full h-full object-cover"
+                layout="fill"
+                objectFit="cover"
               />
               <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6"></div>
             </div>

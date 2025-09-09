@@ -2,10 +2,15 @@
 
 import type React from "react"
 import { useState, useEffect } from "react"
+import dynamic from 'next/dynamic'
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { CheckCircle, XCircle } from "lucide-react"
-import { ProjectCarousel } from "@/components/project-carousel"
+
+const ProjectCarousel = dynamic(() =>
+  import('@/components/project-carousel').then((mod) => mod.ProjectCarousel)
+);
 
 const CTAButton = ({
   children,
@@ -113,9 +118,11 @@ export default function LandingPage() {
       <section className="py-16 px-4">
         <div className="max-w-4xl mx-auto text-center">
           <div className="mb-8">
-            <img
+            <Image
               src="/engenheiro-guto-real.jpeg"
               alt="Guto - Engenheiro Empreendedor especialista em financiamento"
+              width={192}
+              height={192}
               className="w-48 h-48 rounded-full mx-auto mb-6 shadow-lg object-cover"
             />
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">Quem vai te ensinar</h2>
@@ -131,8 +138,8 @@ export default function LandingPage() {
               { src: "/icon-2.svg", alt: "Ícone 2 - Experiência comprovada" },
               { src: "/icon-3.svg", alt: "Ícone 3 - Resultados garantidos" },
             ].map((image, index) => (
-              <div key={index} className="rounded-lg overflow-hidden shadow-lg">
-                <img src={image.src || "/placeholder.svg"} alt={image.alt} className="w-full h-48 object-cover" />
+              <div key={index} className="relative rounded-lg overflow-hidden shadow-lg h-48">
+                <Image src={image.src || "/placeholder.svg"} alt={image.alt} layout="fill" objectFit="cover" />
               </div>
             ))}
           </div>
@@ -236,9 +243,11 @@ export default function LandingPage() {
               >
                 <CardContent className="p-0">
                   <div className="flex items-center mb-4">
-                    <img
+                    <Image
                       src={testimonial.image || "/placeholder.svg"}
                       alt={testimonial.name}
+                      width={48}
+                      height={48}
                       className="w-12 h-12 rounded-full mr-4 object-cover"
                     />
                     <div>
@@ -457,9 +466,11 @@ export default function LandingPage() {
           </h2>
 
           <div className="mb-8">
-            <img
+            <Image
               src="/familia-engenheiro-plantas.jpeg"
               alt="Família trabalhando com engenheiro analisando plantas da casa"
+              width={800}
+              height={533}
               className="rounded-lg shadow-2xl mx-auto max-w-full h-auto"
             />
           </div>
