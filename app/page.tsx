@@ -6,6 +6,7 @@ import dynamic from "next/dynamic"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { CheckCircle, XCircle } from "lucide-react"
 
 const ProjectCarousel = dynamic(() => import("@/components/project-carousel").then((mod) => mod.ProjectCarousel))
@@ -59,13 +60,14 @@ export default function LandingPage() {
       {/* Hero Section */}
       <section className="relative py-16 px-4 bg-slate-900">
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 text-balance leading-tight text-white">
-            <span className="text-green-400">Construir sua casa própria pode ser fácil e muito mais barato</span>  do que você imagina, utilizando o
-            financiamento da Caixa
+          <h1 className="md:text-6xl font-bold mb-6 text-balance leading-tight text-white text-3xl text-center">
+            <span className="text-green-400"> Construir sua casa própria pode ser simples e muito mais barato</span>{" "}
+            utilizando o financiamento da Caixa
           </h1>
 
-          <p className="text-xl md:text-2xl mb-8 text-gray-100 text-pretty max-w-3xl mx-auto">
-            Na quarta edição da aula &quot;Os segredos da construção financiada&quot;, o Engenheiro credenciado pela Caixa, te mostrará exatamente TUDO o que você precisa para sair do aluguel e conquistar a sua casa dos seus sonhos.
+          <p className="md:text-2xl mb-8 text-gray-100 text-pretty max-w-3xl mx-auto text-lg">
+            No evento online &quot;Os segredos da construção financiada&quot;, o Engenheiro credenciado pela Caixa, te
+            mostrará exatamente TUDO o que você precisa para sair do aluguel e conquistar a casa dos seus sonhos.
           </p>
 
           <CTAButton className="mb-8">QUERO A MINHA CASA PRÓPRIA</CTAButton>
@@ -103,8 +105,8 @@ export default function LandingPage() {
 
           <div className="text-center">
             <p className="text-xl md:text-2xl font-semibold mb-8 text-lime-700">
-              👉 A verdade é que conquistar sua casa financiada pode ser muito simples e muito mais barato do que você
-              imagina.
+              👉 A verdade é que você só mora de aluguel, porque nunca te mostraram que construir sua casa própria pode
+              ser mais barato que morar de aluguel
             </p>
             <CTAButton>QUERO MINHA CASA PRÓPRIA</CTAButton>
           </div>
@@ -123,7 +125,7 @@ export default function LandingPage() {
               className="w-48 h-48 rounded-full mx-auto mb-6 shadow-lg object-cover"
             />
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">Quem vai te ensinar</h2>
-            <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+            <p className="text-muted-foreground mb-8 max-w-2xl mx-auto text-lg">
               Guto, o Engenheiro credenciado e especialista em financiamento pela Caixa, com mais de 7 anos de
               experiência ajudando famílias a realizarem o sonho da casa própria.
             </p>
@@ -154,7 +156,7 @@ export default function LandingPage() {
       <section className="py-16 px-4 bg-muted/30">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-foreground">
-            O que você vai descobrir em nossa aula
+            O que você vai aprender no evento online
           </h2>
 
           <div className="grid md:grid-cols-2 gap-6 mb-12">
@@ -162,8 +164,8 @@ export default function LandingPage() {
               "Como saber se você já pode financiar a construção da sua casa própria",
               "Quanto realmente precisa dar de entrada",
               "Como ser aprovado pela Caixa, com baixa taxa de financiamento",
-              "Os maiores erros que impedem famílias de conquistarem sua casa",
-              "O passo a passo para transformar o sonho em realidade",
+              "Como pagar mais barato na construção da sua casa, do que você paga de aluguel hoje",
+              "O passo a passo completo para transformar o seu sonho em realidade",
             ].map((item, index) => (
               <Card key={index} className="p-6 border-l-4 border-l-primary">
                 <CardContent className="p-0 flex items-start gap-4">
@@ -271,10 +273,10 @@ export default function LandingPage() {
       </section>
 
       {/* Garantia */}
-      <section className="py-16 px-4 text-accent-foreground bg-[rgba(19,23,30,1)]">
+      <section className="py-16 px-4 bg-[rgba(185,248,207,1)] text-foreground">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">100% seguro, você não corre nenhum risco</h2>
-          <p className="text-xl mb-8 text-pretty">
+          <h2 className="md:text-4xl font-bold mb-6 text-2xl">100% seguro, você não corre nenhum risco</h2>
+          <p className="mb-8 text-pretty text-base">
             Se em até 7 dias após a aula você sentir que o conteúdo não te ajudou, devolvemos 100% do seu dinheiro, sem
             perguntas e sem burocracia.
           </p>
@@ -300,7 +302,7 @@ export default function LandingPage() {
             <div className="bg-gradient-to-br from-green-50 to-blue-50 border-2 rounded-2xl p-8 shadow-xl border-primary">
               {/* Banner da data */}
               <div className="bg-green-200 text-green-800 px-6 py-3 rounded-lg mb-6 font-semibold">
-                Aula AO VIVO no dia: 29/09 às 19h30
+                Evento ONLINE e AO VIVO no dia: 29/09 às 19h30
               </div>
 
               {/* Título com ícone */}
@@ -359,7 +361,7 @@ export default function LandingPage() {
       <section className="py-16 px-4 bg-white text-primary-foreground">
         <div className="max-w-3xl mx-auto text-center">
           {/* Headline */}
-          <h2 className="text-3xl md:text-4xl font-bold mb-8 text-destructive">🕒 ATENÇÃO OPORTUNIDADE INÉDITA</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-8 text-destructive">🕒 ATENÇÃO, É UMA OPORTUNIDADE INÉDITA</h2>
 
           <div className="mb-8">
             <Image
@@ -391,14 +393,19 @@ export default function LandingPage() {
           {/* Conexão com a Solução (ESTILO MELHORADO) */}
           <div className="bg-green-50 border-l-4 border-green-500 rounded-lg p-6 mb-8">
             <p className="text-lg text-green-900">
-              <strong> Então, se você está esperando um sinal, esse é o momento. Porque quem aproveita a oportunidade, SEMPRE garante as melhores condições.</strong> 
+              <strong>
+                {" "}
+                Então, se você está esperando um sinal, esse é o momento. Porque quem aproveita a oportunidade, SEMPRE
+                garante as melhores condições.
+              </strong>
             </p>
           </div>
 
           {/* Mensagem vermelha */}
           <div className="mb-8">
             <p className="font-semibold text-red-600 text-lg">
-              🚨 Mas vale um alerta, vejo centanas de pessoas deixando pra depois e se arrependendo, pois normalmente quem não aproveita a oportunidade, sempre acaba pagando mais caro ou perdendo a chance única.
+              🚨 Mas vale um alerta, vejo centenas de pessoas deixando pra depois e se arrependendo, pois normalmente
+              quem não aproveita a oportunidade, sempre acaba pagando mais caro ou perdendo a chance única.
             </p>
           </div>
 
@@ -407,9 +414,9 @@ export default function LandingPage() {
             href="https://pay.hotmart.com/T101665306P?checkoutMode=10&bid=1756654894781"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-colors w-full md:w-auto text-center"
+            className="inline-block bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-lg font-semibold transition-colors w-full md:w-auto text-center text-base"
           >
-            QUERO APROVEITAR ESSA CHANCE
+            QUERO APROVEITAR A CHANCE
           </a>
         </div>
       </section>
@@ -419,7 +426,7 @@ export default function LandingPage() {
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-foreground">Perguntas Frequentes</h2>
 
-          <div className="space-y-6 mb-12">
+          <Accordion type="single" collapsible className="space-y-4 mb-12">
             {[
               {
                 question: "E se minha renda não for aprovada?",
@@ -446,14 +453,14 @@ export default function LandingPage() {
                   "Não! Ter o lote não é um pré-requisito. A Caixa tem uma modalidade de financiamento exclusiva para isso, você pode financiar a compra de lote mais a construção no mesmo contrato — com a mesma taxa, mesma análise e um só processo. Durante a aula, vamos te todos mostrar os caminhos possíveis. Assim, você já se prepara para dar o próximo passo com segurança",
               },
             ].map((faq, index) => (
-              <Card key={index} className="p-6">
-                <CardContent className="p-0">
-                  <h3 className="text-lg font-semibold mb-3 text-card-foreground">{faq.question}</h3>
-                  <p className="text-muted-foreground">{faq.answer}</p>
-                </CardContent>
-              </Card>
+              <AccordionItem key={index} value={`item-${index}`} className="bg-white rounded-lg shadow-sm border">
+                <AccordionTrigger className="px-6 py-4 font-semibold text-card-foreground hover:no-underline text-base">
+                  {faq.question}
+                </AccordionTrigger>
+                <AccordionContent className="px-6 pb-4 text-muted-foreground">{faq.answer}</AccordionContent>
+              </AccordionItem>
             ))}
-          </div>
+          </Accordion>
 
           <div className="text-center">
             <CTAButton>QUERO MINHA CASA PRÓPRIA</CTAButton>
