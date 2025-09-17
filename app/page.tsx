@@ -2,15 +2,13 @@
 
 import type React from "react"
 import { useState, useEffect } from "react"
-import dynamic from 'next/dynamic'
+import dynamic from "next/dynamic"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { CheckCircle, XCircle } from "lucide-react"
 
-const ProjectCarousel = dynamic(() =>
-  import('@/components/project-carousel').then((mod) => mod.ProjectCarousel)
-);
+const ProjectCarousel = dynamic(() => import("@/components/project-carousel").then((mod) => mod.ProjectCarousel))
 
 const CTAButton = ({
   children,
@@ -362,40 +360,46 @@ export default function LandingPage() {
       <section className="py-16 px-4 bg-white text-primary-foreground">
         <div className="max-w-3xl mx-auto text-center">
           {/* Headline */}
-          <h2 className="text-3xl md:text-4xl font-bold mb-8">
-            🕒 ATENÇÃO: A Caixa abriu uma janela inédita para quem quer construir. E ela pode fechar a qualquer momento.
-          </h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-8 text-destructive">🕒 ATENÇÃO OPORTUNIDADE INÉDITA</h2>
+
+          <div className="mb-8">
+            <Image
+              src="/globo-minha-casa-minha-vida.jpeg"
+              alt="Reportagem da Globo sobre nova faixa do Minha Casa Minha Vida até R$ 12 mil por mês"
+              width={800}
+              height={450}
+              className="rounded-lg shadow-lg mx-auto max-w-full h-auto"
+            />
+          </div>
 
           {/* Contexto Detalhado */}
           <div className="space-y-4 text-lg text-left md:text-center text-gray-700 mb-8">
             <p>
-              Em 2025, o Minha Casa Minha Vida lançou a <strong>Faixa 4</strong>, voltada para famílias com renda entre{" "}
-              <strong>R$ 8 mil e R$ 12 mil</strong> por mês.
+              <strong> Agora é oficial, o Jornal Nacional divulgou:</strong> Famílias com renda de até 12 mil reais, já
+              podem <strong>financiar a construção da casa própria</strong>, pelo Minha Casa Minha Vida.
             </p>
             <p>
-              👉 É a <strong>primeira vez</strong> que a classe média pode financiar a construção da casa com{" "}
-              <strong>juros reduzidos</strong> e condições especiais, mesmo fora das faixas populares.
+              👉<strong>Essa é uma oportunidade inédita</strong> e pode ser a sua chance de finalmente construir a casa
+              dos seus sonhos, com o crédito da Caixa e a taxa do Minha Casa Minha Vida.
             </p>
             <p>
-              💡 E o melhor: você pode usar seu <strong>FGTS</strong>, financiar o{" "}
-              <strong>terreno e a obra no mesmo contrato</strong>, com o suporte técnico certo.
+              💡 Mas deixa eu ser bem direto com você: <strong>Até quando essa possibilidade irá ficar aberta?</strong>{" "}
+              Sinceramente, a gente sabe como nosso país funciona... Essas condições aparecem quando a eleição se
+              aproxima, mas somem logo depois.
             </p>
           </div>
 
           {/* Conexão com a Solução (ESTILO MELHORADO) */}
           <div className="bg-green-50 border-l-4 border-green-500 rounded-lg p-6 mb-8">
             <p className="text-lg text-green-900">
-              Na imersão <strong>&quot;Os Segredos da Construção Financiada&quot;</strong>, você vai entender como essa
-              nova faixa funciona para quem quer construir, o passo a passo para aproveitar o crédito com estratégia e
-              por que essa pode ser a <strong>melhor hora para sair do aluguel</strong>.
+              <strong> Então, se você está esperando um sinal, esse é o momento. Porque quem aproveita a oportunidade, SEMPRE garante as melhores condições.</strong> 
             </p>
           </div>
 
           {/* Mensagem vermelha */}
           <div className="mb-8">
             <p className="font-semibold text-red-600 text-lg">
-              🚨 Mas vale o alerta: esse tipo de condição não costuma durar muito. A Caixa muda as regras com frequência
-              — e quem não entende o momento, perde a chance de construir com economia e segurança.
+              🚨 Mas vale um alerta, vejo centanas de pessoas deixando pra depois e se arrependendo, pois normalmente quem não aproveita a oportunidade, sempre acaba pagando mais caro ou perdendo a chance única.
             </p>
           </div>
 
