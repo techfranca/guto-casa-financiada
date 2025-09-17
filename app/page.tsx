@@ -60,16 +60,15 @@ export default function LandingPage() {
       <section className="relative py-16 px-4 bg-slate-900">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-6 text-balance leading-tight text-white">
-            Descubra os segredos para <span className="text-green-400">construir sua casa própria</span> através do
+            <span className="text-green-400">Construir sua casa própria pode ser fácil e muito mais barato</span>  do que você imagina, utilizando o
             financiamento da Caixa
           </h1>
 
           <p className="text-xl md:text-2xl mb-8 text-gray-100 text-pretty max-w-3xl mx-auto">
-            Na quarta edição da aula "Os segredos da construção financiada", o Engenheiro credenciado pela Caixa, te
-            mostrará exatamente TUDO o que você precisa para sair do aluguel e conquistar a sua casa dos sonhos.
+            Na quarta edição da aula &quot;Os segredos da construção financiada&quot;, o Engenheiro credenciado pela Caixa, te mostrará exatamente TUDO o que você precisa para sair do aluguel e conquistar a sua casa dos seus sonhos.
           </p>
 
-          <CTAButton className="mb-8">QUERO MINHA CASA PRÓPRIA</CTAButton>
+          <CTAButton className="mb-8">QUERO A MINHA CASA PRÓPRIA</CTAButton>
 
           <ProjectCarousel />
 
