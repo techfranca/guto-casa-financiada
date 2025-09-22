@@ -123,10 +123,66 @@
   }
   body {
     @apply bg-background text-foreground;
+    /* Adding performance optimizations */
+    font-display: swap;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
   html,
   body {
     overflow-x: hidden;
     max-width: 100vw;
+    /* Improving scroll performance */
+    scroll-behavior: smooth;
+  }
+
+  /* Adding critical performance styles */
+  img {
+    content-visibility: auto;
+  }
+
+  iframe {
+    content-visibility: auto;
+  }
+
+  /* Optimizing animations for better performance */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* Critical loading states */
+  .loading-skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+  }
+
+  @keyframes loading {
+    0% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
+  }
+}
+
+/* Adding critical CSS for above-the-fold content */
+@layer utilities {
+  .critical-section {
+    contain: layout style paint;
+  }
+
+  .lazy-section {
+    content-visibility: auto;
+    contain-intrinsic-size: 0 500px;
   }
 }

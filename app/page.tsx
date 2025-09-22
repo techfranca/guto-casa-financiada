@@ -1,7 +1,7 @@
 "use client"
 
 import type React from "react"
-import { useState, useEffect } from "react"
+import { useState, useEffect, Suspense } from "react"
 import dynamic from "next/dynamic"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
@@ -9,7 +9,60 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { CheckCircle, XCircle } from "lucide-react"
 
-const ProjectCarousel = dynamic(() => import("@/components/project-carousel").then((mod) => mod.ProjectCarousel))
+const ProjectCarousel = dynamic(() => import("@/components/project-carousel").then((mod) => mod.ProjectCarousel), {
+  loading: () => <div className="h-64 bg-slate-800 animate-pulse rounded-lg" />,
+  ssr: false,
+})
+
+const YouTubeEmbed = dynamic(
+  () =>
+    Promise.resolve(({ videoId }: { videoId: string }) => {
+      const [isLoaded, setIsLoaded] = useState(false)
+
+      return (
+        <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
+          {!isLoaded && (
+            <div
+              className="absolute inset-0 bg-black rounded-lg cursor-pointer flex items-center justify-center"
+              onClick={() => setIsLoaded(true)}
+            >
+              <Image
+                src={`https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`}
+                alt="Video thumbnail"
+                fill
+                className="object-cover rounded-lg"
+                priority
+              />
+              <div className="absolute inset-0 bg-black/30 rounded-lg" />
+              <button className="absolute inset-0 flex items-center justify-center">
+                <div className="w-20 h-20 bg-red-600 rounded-full flex items-center justify-center hover:bg-red-700 transition-colors">
+                  <svg className="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </div>
+              </button>
+            </div>
+          )}
+          {isLoaded && (
+            <iframe
+              className="absolute top-0 left-0 w-full h-full rounded-lg shadow-lg"
+              src={`https://www.youtube.com/embed/${videoId}?si=EToxgqqonj_WP86Y&autoplay=1`}
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+              loading="lazy"
+            />
+          )}
+        </div>
+      )
+    }),
+  {
+    loading: () => <div className="w-full h-0 pb-[56.25%] bg-slate-800 animate-pulse rounded-lg" />,
+    ssr: false,
+  },
+)
 
 const CTAButton = ({
   children,
@@ -50,7 +103,7 @@ const VagasCounter = () => {
         }
         return prev
       })
-    }, 15000) // 15 seconds
+    }, 15000)
 
     return () => clearInterval(interval)
   }, [])
@@ -82,17 +135,9 @@ export default function LandingPage() {
       {/* YouTube Video Section */}
       <section className="pt-0 pb-2 px-4 bg-slate-900">
         <div className="max-w-4xl mx-auto">
-          <div className="relative w-full" style={{ paddingBottom: "56.25%" /* 16:9 aspect ratio */ }}>
-            <iframe
-              className="absolute top-0 left-0 w-full h-full rounded-lg shadow-lg"
-              src="https://www.youtube.com/embed/f-_6DJRbyDo?si=EToxgqqonj_WP86Y"
-              title="YouTube video player"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerPolicy="strict-origin-when-cross-origin"
-              allowFullScreen
-            />
-          </div>
+          <Suspense fallback={<div className="w-full h-0 pb-[56.25%] bg-slate-800 animate-pulse rounded-lg" />}>
+            <YouTubeEmbed videoId="f-_6DJRbyDo" />
+          </Suspense>
           <div className="text-center mt-4">
             <CTAButton>QUERO A MINHA CASA PRÓPRIA</CTAButton>
           </div>
@@ -106,7 +151,9 @@ export default function LandingPage() {
             Veja casas construídas com o financiamento da caixa:
           </h1>
 
-          <ProjectCarousel />
+          <Suspense fallback={<div className="h-64 bg-slate-800 animate-pulse rounded-lg" />}>
+            <ProjectCarousel />
+          </Suspense>
 
           <p className="mt-6 text-lg font-semibold px-4 py-2 rounded-lg inline-block text-white bg-slate-800 border border-slate-600">
             ✨ Projetos reais financiados e construídos com sucesso
@@ -138,7 +185,7 @@ export default function LandingPage() {
           </div>
 
           <div className="text-center">
-            <p className="text-xl md:text-2xl font-semibold mb-8 text-lime-700">
+            <p className="md:text-2xl font-semibold mb-8 text-lime-700 text-base">
               👉 A verdade é que você só mora de aluguel, porque nunca te mostraram que construir sua casa própria pode
               ser mais barato que morar de aluguel
             </p>
@@ -157,9 +204,11 @@ export default function LandingPage() {
               width={192}
               height={192}
               className="w-48 h-48 rounded-full mx-auto mb-6 shadow-lg object-cover"
+              priority
+              sizes="(max-width: 768px) 192px, 192px"
             />
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">Quem vai te ensinar</h2>
-            <p className="text-muted-foreground mb-8 max-w-2xl mx-auto text-lg">
+            <p className="text-muted-foreground mb-8 max-w-2xl mx-auto text-sm">
               Guto, o Engenheiro credenciado e especialista em financiamento pela Caixa, com mais de 7 anos de
               experiência ajudando famílias a realizarem o sonho da casa própria.
             </p>
@@ -172,12 +221,19 @@ export default function LandingPage() {
               { src: "/icon-3.svg", alt: "Ícone 3 - Resultados garantidos" },
             ].map((image, index) => (
               <div key={index} className="relative rounded-lg overflow-hidden shadow-lg h-48">
-                <Image src={image.src || "/placeholder.svg"} alt={image.alt} layout="fill" objectFit="cover" />
+                <Image
+                  src={image.src || "/placeholder.svg"}
+                  alt={image.alt}
+                  fill
+                  className="object-cover"
+                  loading="lazy"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 33vw"
+                />
               </div>
             ))}
           </div>
 
-          <p className="text-xl font-semibold text-accent mb-8">
+          <p className="font-semibold text-accent mb-8 text-sm">
             "Nos últimos anos, ajudei dezenas de famílias a sairem do aluguel e realizarem o sonho da casa própria.
             Agora, chegou a sua vez."
           </p>
@@ -189,7 +245,7 @@ export default function LandingPage() {
       {/* O que você vai aprender */}
       <section className="py-16 px-4 bg-muted/30">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-foreground">
+          <h2 className="md:text-4xl font-bold text-center mb-12 text-foreground text-2xl">
             O que você vai aprender no evento online
           </h2>
 
@@ -204,7 +260,7 @@ export default function LandingPage() {
               <Card key={index} className="p-6 border-l-4 border-l-primary">
                 <CardContent className="p-0 flex items-start gap-4">
                   <CheckCircle className="h-6 w-6 text-primary mt-1 flex-shrink-0" />
-                  <p className="text-lg text-card-foreground font-medium">{item}</p>
+                  <p className="text-card-foreground font-medium text-sm">{item}</p>
                 </CardContent>
               </Card>
             ))}
@@ -282,6 +338,8 @@ export default function LandingPage() {
                       width={48}
                       height={48}
                       className="w-12 h-12 rounded-full mr-4 object-cover"
+                      loading="lazy"
+                      sizes="48px"
                     />
                     <div>
                       <h4 className="font-bold text-gray-800">{testimonial.name}</h4>
@@ -309,8 +367,8 @@ export default function LandingPage() {
       {/* Garantia */}
       <section className="py-16 px-4 bg-[rgba(185,248,207,1)] text-foreground">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="md:text-4xl font-bold mb-6 text-2xl">100% seguro, você não corre nenhum risco</h2>
-          <p className="mb-8 text-pretty text-base">
+          <h2 className="md:text-4xl font-bold mb-6 text-2xl">7 dias de garantia!  </h2>
+          <p className="mb-8 text-pretty text-sm">
             Se em até 7 dias após a aula você sentir que o conteúdo não te ajudou, devolvemos 100% do seu dinheiro, sem
             perguntas e sem burocracia.
           </p>
@@ -324,27 +382,22 @@ export default function LandingPage() {
       {/* A Oferta */}
       <section id="oferta" className="py-16 px-4">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-8 text-foreground">SUPER OFERTA ESPECIAL HOJE!</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-8 text-foreground">SUPER OFERTA ESPECIAL! </h2>
 
           <div className="relative max-w-2xl mx-auto">
-            {/* Badge de desconto */}
             <div className="absolute -top-4 -right-4 bg-red-500 text-white px-4 py-2 rounded-full font-bold text-sm z-10 shadow-lg">
               90% OFF
             </div>
 
-            {/* Card principal */}
             <div className="bg-gradient-to-br from-green-50 to-blue-50 border-2 rounded-2xl p-8 shadow-xl border-primary">
-              {/* Banner da data */}
               <div className="bg-green-200 text-green-800 px-6 py-3 rounded-lg mb-6 font-semibold">
                 Evento ONLINE e AO VIVO no dia: 29/09 às 19h30
               </div>
 
-              {/* Título com ícone */}
               <div className="mb-8">
-                <h3 className="text-2xl font-bold text-gray-800 mb-4">🎁 Ao garantir sua vaga hoje, você recebe:</h3>
+                <h3 className="font-bold text-gray-800 mb-4 text-xl">🎁 Ao garantir sua vaga hoje, você recebe:</h3>
               </div>
 
-              {/* Lista de itens com valores */}
               <div className="space-y-4 mb-8 text-left">
                 <div className="flex justify-between items-center py-3 border-b border-gray-200">
                   <span className="text-gray-700 font-medium">
@@ -366,9 +419,8 @@ export default function LandingPage() {
                 </div>
               </div>
 
-              {/* Preços */}
               <div className="text-center mb-6">
-                <p className="text-xl text-gray-600 font-semibold mb-2">De: R$497,00</p>
+                <p className="text-xl font-semibold mb-2 text-destructive line-through">De: R$497,00</p>
                 <p className="text-5xl font-bold text-green-600 mb-6">Por: R$47</p>
               </div>
 
@@ -386,8 +438,7 @@ export default function LandingPage() {
       {/* Escassez e Urgência */}
       <section className="py-16 px-4 bg-white text-primary-foreground">
         <div className="max-w-3xl mx-auto text-center">
-          {/* Headline */}
-          <h2 className="text-3xl md:text-4xl font-bold mb-8 text-destructive">
+          <h2 className="md:text-4xl font-bold mb-8 text-destructive text-2xl">
             🕒 ATENÇÃO, É UMA OPORTUNIDADE INÉDITA
           </h2>
 
@@ -398,30 +449,30 @@ export default function LandingPage() {
               width={800}
               height={450}
               className="rounded-lg shadow-lg mx-auto max-w-full h-auto"
+              loading="lazy"
+              sizes="(max-width: 768px) 100vw, 800px"
             />
           </div>
 
-          {/* Contexto Detalhado */}
           <div className="space-y-4 text-lg text-left md:text-center text-gray-700 mb-8">
-            <p>
+            <p className="text-sm">
               <strong> Agora é oficial, o Jornal Nacional divulgou:</strong> Famílias com renda de até 12 mil reais, já
               podem <strong>financiar a construção da casa própria</strong>, pelo Minha Casa Minha Vida.
             </p>
-            <p>
+            <p className="text-sm">
               👉<strong>Essa é uma oportunidade inédita</strong> e pode ser a sua chance de finalmente construir a casa
               dos seus sonhos, com o crédito da Caixa e a taxa do Minha Casa Minha Vida.
             </p>
-            <p>
+            <p className="text-sm">
               💡 Mas deixa eu ser bem direto com você: <strong>Até quando essa possibilidade irá ficar aberta?</strong>{" "}
               Sinceramente, a gente sabe como nosso país funciona... Essas condições aparecem quando a eleição se
               aproxima, mas somem logo depois.
             </p>
           </div>
 
-          {/* Conexão com a Solução (ESTILO MELHORADO) */}
           <div className="bg-green-50 border-l-4 border-green-500 rounded-lg p-6 mb-8">
             <p className="text-lg text-green-900">
-              <strong>
+              <strong className="text-sm">
                 {" "}
                 Então, se você está esperando um sinal, esse é o momento. Porque quem aproveita a oportunidade, SEMPRE
                 garante as melhores condições.
@@ -429,11 +480,9 @@ export default function LandingPage() {
             </p>
           </div>
 
-          {/* Mensagem vermelha */}
           <div className="mb-8">
-            <p className="font-semibold text-red-600 text-lg">
-              🚨 Mas vale um alerta, vejo centenas de pessoas deixando pra depois e se arrependendo, pois normalmente
-              quem não aproveita a oportunidade, sempre acaba pagando mais caro ou perdendo a chance única.
+            <p className="font-semibold text-red-600 text-sm">
+              🚨 Mas vale um alerta, vejo centenas de pessoas deixando pra depois e se arrependendo, pois normalmente quem não aproveita a oportunidade, sempre acaba pagando mais caro ou perdendo a chance. 
             </p>
           </div>
 
@@ -504,12 +553,14 @@ export default function LandingPage() {
               width={800}
               height={533}
               className="rounded-lg shadow-2xl mx-auto max-w-full h-auto"
+              loading="lazy"
+              sizes="(max-width: 768px) 100vw, 800px"
             />
           </div>
 
           <CTAButton variant="large">QUERO MINHA CASA PRÓPRIA</CTAButton>
 
-          <p className="mt-6 text-accent-foreground/80">✅ Garantia de 7 dias • ✅ Suporte completo</p>
+          
         </div>
       </section>
 
