@@ -15,21 +15,29 @@ const CTAButton = ({
   children,
   className = "",
   href = "#oferta",
-}: { children: React.ReactNode; className?: string; href?: string }) => (
-  <Button
-    asChild
-    size="lg"
-    className={`bg-primary hover:bg-primary/90 font-bold py-4 px-8 rounded-xl text-lg transition-all duration-300 hover:scale-105 shadow-lg text-primary-foreground ${className}`}
-  >
-    <a
-      href={href}
-      target={href.startsWith("http") ? "_blank" : undefined}
-      rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-    >
-      {children}
-    </a>
-  </Button>
-)
+  variant = "default",
+}: {
+  children: React.ReactNode
+  className?: string
+  href?: string
+  variant?: "default" | "large"
+}) => {
+  const baseClasses =
+    "bg-green-500 hover:bg-green-600 text-white font-bold rounded-xl transition-all duration-300 hover:scale-105 shadow-lg border-2 border-green-400 hover:border-green-500"
+  const sizeClasses = variant === "large" ? "py-6 px-12 text-xl" : "py-4 px-8 text-lg"
+
+  return (
+    <Button asChild size="lg" className={`${baseClasses} ${sizeClasses} ${className}`}>
+      <a
+        href={href}
+        target={href.startsWith("http") ? "_blank" : undefined}
+        rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+      >
+        {children}
+      </a>
+    </Button>
+  )
+}
 
 const VagasCounter = () => {
   const [vagas, setVagas] = useState(26)
@@ -53,24 +61,50 @@ const VagasCounter = () => {
 export default function LandingPage() {
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
-      <div className="bg-primary text-primary-foreground py-3 px-4 text-center font-bold text-lg">
+      <div className="bg-primary text-primary-foreground py-3 px-4 text-center font-bold text-xs">
         AULA AO VIVO DIA: 29/09 às 19h30
       </div>
 
-      {/* Hero Section */}
-      <section className="relative py-16 px-4 bg-slate-900">
+      <section className="relative py-8 px-4 bg-slate-900">
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="md:text-6xl font-bold mb-6 text-balance leading-tight text-white text-3xl text-center">
+          <h1 className="font-bold mb-6 text-balance leading-tight text-white text-center md:text-4xl text-2xl">
             <span className="text-green-400"> Construir sua casa própria pode ser simples e muito mais barato</span>{" "}
             utilizando o financiamento da Caixa
           </h1>
-
-          <p className="md:text-2xl mb-8 text-gray-100 text-pretty max-w-3xl mx-auto text-lg">
-            No evento online &quot;Os segredos da construção financiada&quot;, o Engenheiro credenciado pela Caixa, te
-            mostrará exatamente TUDO o que você precisa para sair do aluguel e conquistar a casa dos seus sonhos.
+          <p className="md:text-2xl mb-8 text-gray-100 text-pretty max-w-3xl mx-auto text-xs">
+            Pela primeira vez online, assista agora e descubra na prática como construir sua casa própria pode ser mais
+            barato que morar de aluguel e transforme seu sonho da casa própria em realidade. Mesmo que você ainda não
+            tenha um LOTE comprado!
           </p>
+        </div>
+      </section>
 
-          <CTAButton className="mb-8">QUERO A MINHA CASA PRÓPRIA</CTAButton>
+      {/* YouTube Video Section */}
+      <section className="pt-0 pb-2 px-4 bg-slate-900">
+        <div className="max-w-4xl mx-auto">
+          <div className="relative w-full" style={{ paddingBottom: "56.25%" /* 16:9 aspect ratio */ }}>
+            <iframe
+              className="absolute top-0 left-0 w-full h-full rounded-lg shadow-lg"
+              src="https://www.youtube.com/embed/f-_6DJRbyDo?si=EToxgqqonj_WP86Y"
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+            />
+          </div>
+          <div className="text-center mt-4">
+            <CTAButton>QUERO A MINHA CASA PRÓPRIA</CTAButton>
+          </div>
+        </div>
+      </section>
+
+      {/* Hero Section */}
+      <section className="relative pt-16 pb-2 px-4 bg-slate-900">
+        <div className="max-w-4xl mx-auto text-center">
+          <h1 className="md:text-4xl font-bold mb-8 text-white text-center text-xl">
+            Veja casas construídas com o financiamento da caixa:
+          </h1>
 
           <ProjectCarousel />
 
@@ -338,20 +372,12 @@ export default function LandingPage() {
                 <p className="text-5xl font-bold text-green-600 mb-6">Por: R$47</p>
               </div>
 
-              {/* Botão CTA */}
-              <Button
-                asChild
-                size="lg"
-                className="w-full bg-primary hover:bg-primary/90 font-bold py-4 px-8 rounded-xl text-lg transition-all duration-300 hover:scale-105 shadow-lg text-primary-foreground"
+              <CTAButton
+                href="https://pay.hotmart.com/T101665306P?checkoutMode=10&bid=1756654894781"
+                className="w-full"
               >
-                <a
-                  href="https://pay.hotmart.com/T101665306P?checkoutMode=10&bid=1756654894781"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  GARANTIR OFERTA ESPECIAL
-                </a>
-              </Button>
+                GARANTIR OFERTA ESPECIAL
+              </CTAButton>
             </div>
           </div>
         </div>
@@ -361,7 +387,9 @@ export default function LandingPage() {
       <section className="py-16 px-4 bg-white text-primary-foreground">
         <div className="max-w-3xl mx-auto text-center">
           {/* Headline */}
-          <h2 className="text-3xl md:text-4xl font-bold mb-8 text-destructive">🕒 ATENÇÃO, É UMA OPORTUNIDADE INÉDITA</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-8 text-destructive">
+            🕒 ATENÇÃO, É UMA OPORTUNIDADE INÉDITA
+          </h2>
 
           <div className="mb-8">
             <Image
@@ -409,15 +437,9 @@ export default function LandingPage() {
             </p>
           </div>
 
-          {/* CTA */}
-          <a
-            href="https://pay.hotmart.com/T101665306P?checkoutMode=10&bid=1756654894781"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-lg font-semibold transition-colors w-full md:w-auto text-center text-base"
-          >
+          <CTAButton href="https://pay.hotmart.com/T101665306P?checkoutMode=10&bid=1756654894781">
             QUERO APROVEITAR A CHANCE
-          </a>
+          </CTAButton>
         </div>
       </section>
 
@@ -485,7 +507,7 @@ export default function LandingPage() {
             />
           </div>
 
-          <CTAButton className="text-xl py-6 px-12">QUERO MINHA CASA PRÓPRIA</CTAButton>
+          <CTAButton variant="large">QUERO MINHA CASA PRÓPRIA</CTAButton>
 
           <p className="mt-6 text-accent-foreground/80">✅ Garantia de 7 dias • ✅ Suporte completo</p>
         </div>
