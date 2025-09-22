@@ -1,7 +1,9 @@
 "use client"
 
-import type React from "react"
-import { useState, useEffect, Suspense } from "react"
+import React from "react"
+
+import type { ReactNode } from "react"
+import { useState, useEffect } from "react"
 import dynamic from "next/dynamic"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
@@ -10,81 +12,37 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { CheckCircle, XCircle } from "lucide-react"
 
 const ProjectCarousel = dynamic(() => import("@/components/project-carousel").then((mod) => mod.ProjectCarousel), {
-  loading: () => <div className="h-64 bg-slate-800 animate-pulse rounded-lg" />,
+  loading: () => <div className="h-64 bg-gray-200 animate-pulse rounded-lg" />,
   ssr: false,
 })
-
-const YouTubeEmbed = dynamic(
-  () =>
-    Promise.resolve(({ videoId }: { videoId: string }) => {
-      const [isLoaded, setIsLoaded] = useState(false)
-
-      return (
-        <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
-          {!isLoaded && (
-            <div
-              className="absolute inset-0 bg-black rounded-lg cursor-pointer flex items-center justify-center"
-              onClick={() => setIsLoaded(true)}
-            >
-              <Image
-                src={`https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`}
-                alt="Video thumbnail"
-                fill
-                className="object-cover rounded-lg"
-                priority
-              />
-              <div className="absolute inset-0 bg-black/30 rounded-lg" />
-              <button className="absolute inset-0 flex items-center justify-center">
-                <div className="w-20 h-20 bg-red-600 rounded-full flex items-center justify-center hover:bg-red-700 transition-colors">
-                  <svg className="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M8 5v14l11-7z" />
-                  </svg>
-                </div>
-              </button>
-            </div>
-          )}
-          {isLoaded && (
-            <iframe
-              className="absolute top-0 left-0 w-full h-full rounded-lg shadow-lg"
-              src={`https://www.youtube.com/embed/${videoId}?si=EToxgqqonj_WP86Y&autoplay=1`}
-              title="YouTube video player"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerPolicy="strict-origin-when-cross-origin"
-              allowFullScreen
-              loading="lazy"
-            />
-          )}
-        </div>
-      )
-    }),
-  {
-    loading: () => <div className="w-full h-0 pb-[56.25%] bg-slate-800 animate-pulse rounded-lg" />,
-    ssr: false,
-  },
-)
 
 const CTAButton = ({
   children,
   className = "",
   href = "#oferta",
-  variant = "default",
+  variant = "primary",
 }: {
-  children: React.ReactNode
+  children: ReactNode
   className?: string
   href?: string
-  variant?: "default" | "large"
+  variant?: "primary" | "secondary" | "success"
 }) => {
   const baseClasses =
-    "bg-green-500 hover:bg-green-600 text-white font-bold rounded-xl transition-all duration-300 hover:scale-105 shadow-lg border-2 border-green-400 hover:border-green-500"
-  const sizeClasses = variant === "large" ? "py-6 px-12 text-xl" : "py-4 px-8 text-lg"
+    "font-bold py-4 px-8 rounded-xl text-lg transition-all duration-300 hover:scale-105 shadow-lg focus:outline-none focus:ring-4 focus:ring-opacity-50"
+
+  const variants = {
+    primary: "bg-primary hover:bg-primary/90 text-primary-foreground focus:ring-primary",
+    secondary: "bg-secondary hover:bg-secondary/90 text-secondary-foreground focus:ring-secondary",
+    success: "bg-green-600 hover:bg-green-700 text-white focus:ring-green-500",
+  }
 
   return (
-    <Button asChild size="lg" className={`${baseClasses} ${sizeClasses} ${className}`}>
+    <Button asChild size="lg" className={`${baseClasses} ${variants[variant]} ${className}`}>
       <a
         href={href}
         target={href.startsWith("http") ? "_blank" : undefined}
         rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+        aria-label={typeof children === "string" ? children : "Botão de ação"}
       >
         {children}
       </a>
@@ -92,100 +50,77 @@ const CTAButton = ({
   )
 }
 
-const VagasCounter = () => {
+const VagasCounter = React.memo(() => {
   const [vagas, setVagas] = useState(26)
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setVagas((prev) => {
-        if (prev > 17) {
-          return prev - 1
-        }
-        return prev
-      })
+      setVagas((prev) => (prev > 17 ? prev - 1 : prev))
     }, 15000)
 
     return () => clearInterval(interval)
   }, [])
 
   return <div className="text-4xl font-bold text-primary-foreground">{vagas}</div>
-}
+})
+
+VagasCounter.displayName = "VagasCounter"
 
 export default function LandingPage() {
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
-      <div className="bg-primary text-primary-foreground py-3 px-4 text-center font-bold text-xs">
+      <div className="bg-primary text-primary-foreground py-3 px-4 text-center font-bold text-base sm:text-lg">
         AULA AO VIVO DIA: 29/09 às 19h30
       </div>
 
-      <section className="relative py-8 px-4 bg-slate-900">
+      {/* Hero Section */}
+      <section className="relative py-12 sm:py-16 px-4 bg-slate-900">
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="font-bold mb-6 text-balance leading-tight text-white text-center md:text-4xl text-2xl">
-            <span className="text-green-400"> Construir sua casa própria pode ser simples e muito mais barato</span>{" "}
+          <h1 className="text-2xl sm:text-3xl md:text-6xl font-bold mb-6 text-balance leading-tight text-white">
+            <span className="text-green-400">Construir sua casa própria pode ser simples e muito mais barato</span>{" "}
             utilizando o financiamento da Caixa
           </h1>
-          <p className="md:text-2xl mb-8 text-gray-100 text-pretty max-w-3xl mx-auto text-xs">
-            Pela primeira vez online, assista agora e descubra na prática como construir sua casa própria pode ser mais
-            barato que morar de aluguel e transforme seu sonho da casa própria em realidade. Mesmo que você ainda não
-            tenha um LOTE comprado!
+
+          <p className="text-base sm:text-lg md:text-2xl mb-8 text-gray-100 text-pretty max-w-3xl mx-auto">
+            No evento online "Os segredos da construção financiada", o Engenheiro credenciado pela Caixa, te mostrará
+            exatamente TUDO o que você precisa para sair do aluguel e conquistar a casa dos seus sonhos.
           </p>
-        </div>
-      </section>
 
-      {/* YouTube Video Section */}
-      <section className="pt-0 pb-2 px-4 bg-slate-900">
-        <div className="max-w-4xl mx-auto">
-          <Suspense fallback={<div className="w-full h-0 pb-[56.25%] bg-slate-800 animate-pulse rounded-lg" />}>
-            <YouTubeEmbed videoId="f-_6DJRbyDo" />
-          </Suspense>
-          <div className="text-center mt-4">
-            <CTAButton>QUERO A MINHA CASA PRÓPRIA</CTAButton>
-          </div>
-        </div>
-      </section>
+          <CTAButton className="mb-8">QUERO A MINHA CASA PRÓPRIA</CTAButton>
 
-      {/* Hero Section */}
-      <section className="relative pt-16 pb-2 px-4 bg-slate-900">
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 className="md:text-4xl font-bold mb-8 text-white text-center text-xl">
-            Veja casas construídas com o financiamento da caixa:
-          </h1>
+          <ProjectCarousel />
 
-          <Suspense fallback={<div className="h-64 bg-slate-800 animate-pulse rounded-lg" />}>
-            <ProjectCarousel />
-          </Suspense>
-
-          <p className="mt-6 text-lg font-semibold px-4 py-2 rounded-lg inline-block text-white bg-slate-800 border border-slate-600">
+          <p className="mt-6 text-base sm:text-lg font-semibold px-4 py-2 rounded-lg inline-block text-white bg-slate-800 border border-slate-600">
             ✨ Projetos reais financiados e construídos com sucesso
           </p>
         </div>
       </section>
 
       {/* Identificação Section */}
-      <section className="py-16 px-4 bg-muted/30">
+      <section className="py-12 sm:py-16 px-4 bg-muted/30">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-foreground">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-8 sm:mb-12 text-foreground">
             Você passa por algum desses problemas?
           </h2>
 
-          <div className="grid md:grid-cols-2 gap-6 mb-12">
+          <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-8 sm:mb-12">
             {[
               "Cansado de pagar aluguel sem nunca construir patrimônio?",
               "Medo do dono pedir o imóvel de volta a qualquer momento?",
-              "Vontade de ter a casa do seu jeito, mas acha que é  MUITO caro e burocrático?",
+              "Vontade de ter a casa do seu jeito, mas acha que é MUITO caro e burocrático?",
               "Está cansado de dividir parede com vizinhos barulhentos, lidar com falta de privacidade e até discussões por pequenos incômodos?",
             ].map((item, index) => (
-              <Card key={index} className="p-6 border-l-4 border-l-destructive">
+              <Card key={index} className="p-4 sm:p-6 border-l-4 border-l-destructive">
                 <CardContent className="p-0 flex items-start gap-4">
-                  <XCircle className="h-6 w-6 text-destructive mt-1 flex-shrink-0" />
-                  <p className="text-lg text-card-foreground">{item}</p>
+                  <XCircle className="h-5 w-5 sm:h-6 sm:w-6 text-destructive mt-1 flex-shrink-0" />
+                  <p className="text-base sm:text-lg text-card-foreground">{item}</p>
                 </CardContent>
               </Card>
             ))}
           </div>
 
           <div className="text-center">
-            <p className="md:text-2xl font-semibold mb-8 text-lime-700 text-base">
+            <p className="text-lg sm:text-xl md:text-2xl font-semibold mb-6 sm:mb-8 text-lime-700">
               👉 A verdade é que você só mora de aluguel, porque nunca te mostraram que construir sua casa própria pode
               ser mais barato que morar de aluguel
             </p>
@@ -195,7 +130,7 @@ export default function LandingPage() {
       </section>
 
       {/* Autoridade Section */}
-      <section className="py-16 px-4">
+      <section className="py-12 sm:py-16 px-4">
         <div className="max-w-4xl mx-auto text-center">
           <div className="mb-8">
             <Image
@@ -203,37 +138,36 @@ export default function LandingPage() {
               alt="Guto - Engenheiro Empreendedor especialista em financiamento"
               width={192}
               height={192}
-              className="w-48 h-48 rounded-full mx-auto mb-6 shadow-lg object-cover"
-              priority
-              sizes="(max-width: 768px) 192px, 192px"
+              className="w-32 h-32 sm:w-48 sm:h-48 rounded-full mx-auto mb-6 shadow-lg object-cover"
+              priority={false}
+              loading="lazy"
             />
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">Quem vai te ensinar</h2>
-            <p className="text-muted-foreground mb-8 max-w-2xl mx-auto text-sm">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 text-foreground">Quem vai te ensinar</h2>
+            <p className="text-muted-foreground mb-6 sm:mb-8 max-w-2xl mx-auto text-base sm:text-lg">
               Guto, o Engenheiro credenciado e especialista em financiamento pela Caixa, com mais de 7 anos de
               experiência ajudando famílias a realizarem o sonho da casa própria.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6 mb-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 mb-8 sm:mb-12">
             {[
               { src: "/icon-1.svg", alt: "Ícone 1 - Especialização em financiamento" },
               { src: "/icon-2.svg", alt: "Ícone 2 - Experiência comprovada" },
               { src: "/icon-3.svg", alt: "Ícone 3 - Resultados garantidos" },
             ].map((image, index) => (
-              <div key={index} className="relative rounded-lg overflow-hidden shadow-lg h-48">
+              <div key={index} className="relative rounded-lg overflow-hidden shadow-lg h-32 sm:h-48">
                 <Image
                   src={image.src || "/placeholder.svg"}
                   alt={image.alt}
                   fill
                   className="object-cover"
                   loading="lazy"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 33vw"
                 />
               </div>
             ))}
           </div>
 
-          <p className="font-semibold text-accent mb-8 text-sm">
+          <p className="text-lg sm:text-xl font-semibold text-accent mb-6 sm:mb-8">
             "Nos últimos anos, ajudei dezenas de famílias a sairem do aluguel e realizarem o sonho da casa própria.
             Agora, chegou a sua vez."
           </p>
@@ -243,13 +177,13 @@ export default function LandingPage() {
       </section>
 
       {/* O que você vai aprender */}
-      <section className="py-16 px-4 bg-muted/30">
+      <section className="py-12 sm:py-16 px-4 bg-muted/30">
         <div className="max-w-4xl mx-auto">
-          <h2 className="md:text-4xl font-bold text-center mb-12 text-foreground text-2xl">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-8 sm:mb-12 text-foreground">
             O que você vai aprender no evento online
           </h2>
 
-          <div className="grid md:grid-cols-2 gap-6 mb-12">
+          <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-8 sm:mb-12">
             {[
               "Como saber se você já pode financiar a construção da sua casa própria",
               "Quanto realmente precisa dar de entrada",
@@ -257,10 +191,10 @@ export default function LandingPage() {
               "Como pagar mais barato na construção da sua casa, do que você paga de aluguel hoje",
               "O passo a passo completo para transformar o seu sonho em realidade",
             ].map((item, index) => (
-              <Card key={index} className="p-6 border-l-4 border-l-primary">
+              <Card key={index} className="p-4 sm:p-6 border-l-4 border-l-primary">
                 <CardContent className="p-0 flex items-start gap-4">
-                  <CheckCircle className="h-6 w-6 text-primary mt-1 flex-shrink-0" />
-                  <p className="text-card-foreground font-medium text-sm">{item}</p>
+                  <CheckCircle className="h-5 w-5 sm:h-6 sm:w-6 text-primary mt-1 flex-shrink-0" />
+                  <p className="text-base sm:text-lg text-card-foreground font-medium">{item}</p>
                 </CardContent>
               </Card>
             ))}
@@ -273,15 +207,21 @@ export default function LandingPage() {
       </section>
 
       {/* Depoimentos */}
-      <section className="py-16 px-4 bg-muted/30">
+      <section className="py-12 sm:py-16 px-4 bg-muted/30">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4 text-foreground">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4 text-foreground">
             Veja o que nossos alunos estão falando
           </h2>
 
-          <div className="flex justify-center items-center mb-12">
+          <div className="flex justify-center items-center mb-8 sm:mb-12">
             <div className="bg-white rounded-full px-4 py-2 shadow-sm border border-gray-200 flex items-center gap-2">
-              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg
+                className="w-4 h-4"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+              >
                 <path
                   d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
                   fill="#4285F4"
@@ -303,7 +243,7 @@ export default function LandingPage() {
             </div>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6 mb-12">
+          <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-8 sm:mb-12">
             {[
               {
                 name: "Iuri Maximiano",
@@ -328,7 +268,7 @@ export default function LandingPage() {
             ].map((testimonial, index) => (
               <Card
                 key={index}
-                className="p-6 bg-white shadow-lg border border-gray-100 hover:shadow-xl transition-shadow"
+                className="p-4 sm:p-6 bg-white shadow-lg border border-gray-100 hover:shadow-xl transition-shadow"
               >
                 <CardContent className="p-0">
                   <div className="flex items-center mb-4">
@@ -339,14 +279,13 @@ export default function LandingPage() {
                       height={48}
                       className="w-12 h-12 rounded-full mr-4 object-cover"
                       loading="lazy"
-                      sizes="48px"
                     />
                     <div>
-                      <h4 className="font-bold text-gray-800">{testimonial.name}</h4>
-                      <div className="flex text-yellow-400">
-                        {"★★★★★".split("").map((star, i) => (
-                          <span key={i} className="text-lg">
-                            {star}
+                      <h4 className="font-bold text-gray-800 text-sm sm:text-base">{testimonial.name}</h4>
+                      <div className="flex text-yellow-400" aria-label="5 estrelas">
+                        {Array.from({ length: 5 }).map((_, i) => (
+                          <span key={i} className="text-lg" aria-hidden="true">
+                            ★
                           </span>
                         ))}
                       </div>
@@ -365,10 +304,10 @@ export default function LandingPage() {
       </section>
 
       {/* Garantia */}
-      <section className="py-16 px-4 bg-[rgba(185,248,207,1)] text-foreground">
+      <section className="py-12 sm:py-16 px-4 bg-[rgba(185,248,207,1)] text-foreground">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="md:text-4xl font-bold mb-6 text-2xl">7 dias de garantia!  </h2>
-          <p className="mb-8 text-pretty text-sm">
+          <h2 className="text-xl sm:text-2xl md:text-4xl font-bold mb-6">100% seguro, você não corre nenhum risco</h2>
+          <p className="mb-6 sm:mb-8 text-pretty text-sm sm:text-base">
             Se em até 7 dias após a aula você sentir que o conteúdo não te ajudou, devolvemos 100% do seu dinheiro, sem
             perguntas e sem burocracia.
           </p>
@@ -380,50 +319,65 @@ export default function LandingPage() {
       </section>
 
       {/* A Oferta */}
-      <section id="oferta" className="py-16 px-4">
+      <section id="oferta" className="py-12 sm:py-16 px-4">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-8 text-foreground">SUPER OFERTA ESPECIAL! </h2>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 text-foreground">
+            SUPER OFERTA ESPECIAL HOJE!
+          </h2>
 
           <div className="relative max-w-2xl mx-auto">
+            {/* Badge de desconto */}
             <div className="absolute -top-4 -right-4 bg-red-500 text-white px-4 py-2 rounded-full font-bold text-sm z-10 shadow-lg">
               90% OFF
             </div>
 
-            <div className="bg-gradient-to-br from-green-50 to-blue-50 border-2 rounded-2xl p-8 shadow-xl border-primary">
-              <div className="bg-green-200 text-green-800 px-6 py-3 rounded-lg mb-6 font-semibold">
+            {/* Card principal */}
+            <div className="bg-gradient-to-br from-green-50 to-blue-50 border-2 rounded-2xl p-6 sm:p-8 shadow-xl border-primary">
+              {/* Banner da data */}
+              <div className="bg-green-200 text-green-800 px-4 sm:px-6 py-3 rounded-lg mb-6 font-semibold text-sm sm:text-base">
                 Evento ONLINE e AO VIVO no dia: 29/09 às 19h30
               </div>
 
-              <div className="mb-8">
-                <h3 className="font-bold text-gray-800 mb-4 text-xl">🎁 Ao garantir sua vaga hoje, você recebe:</h3>
+              {/* Título com ícone */}
+              <div className="mb-6 sm:mb-8">
+                <h3 className="text-xl sm:text-2xl font-bold text-gray-800 mb-4">
+                  🎁 Ao garantir sua vaga hoje, você recebe:
+                </h3>
               </div>
 
-              <div className="space-y-4 mb-8 text-left">
+              {/* Lista de itens com valores */}
+              <div className="space-y-4 mb-6 sm:mb-8 text-left">
                 <div className="flex justify-between items-center py-3 border-b border-gray-200">
-                  <span className="text-gray-700 font-medium">
+                  <span className="text-gray-700 font-medium text-sm sm:text-base">
                     Aula completa "O Segredo da Construção Financiada" ao vivo
                   </span>
                   <span className="font-bold text-gray-800">R$200</span>
                 </div>
                 <div className="flex justify-between items-center py-3 border-b border-gray-200">
-                  <span className="text-gray-700 font-medium">Checklist Completo da Aprovação pela Caixa</span>
+                  <span className="text-gray-700 font-medium text-sm sm:text-base">
+                    Checklist Completo da Aprovação pela Caixa
+                  </span>
                   <span className="font-bold text-gray-800">R$97</span>
                 </div>
                 <div className="flex justify-between items-center py-3 border-b border-gray-200">
-                  <span className="text-gray-700 font-medium">Mini-guia de Melhoria de Score</span>
+                  <span className="text-gray-700 font-medium text-sm sm:text-base">Mini-guia de Melhoria de Score</span>
                   <span className="font-bold text-gray-800">R$50</span>
                 </div>
                 <div className="flex justify-between items-center py-3 border-b border-gray-200">
-                  <span className="text-gray-700 font-medium">Aula Bônus: Como Escolher e comprar o Lote Certo</span>
+                  <span className="text-gray-700 font-medium text-sm sm:text-base">
+                    Aula Bônus: Como Escolher e comprar o Lote Certo
+                  </span>
                   <span className="font-bold text-gray-800">R$150</span>
                 </div>
               </div>
 
+              {/* Preços */}
               <div className="text-center mb-6">
-                <p className="text-xl font-semibold mb-2 text-destructive line-through">De: R$497,00</p>
-                <p className="text-5xl font-bold text-green-600 mb-6">Por: R$47</p>
+                <p className="text-lg sm:text-xl text-gray-600 font-semibold mb-2">De: R$497,00</p>
+                <p className="text-3xl sm:text-5xl font-bold text-green-600 mb-6">Por: R$47</p>
               </div>
 
+              {/* Botão CTA */}
               <CTAButton
                 href="https://pay.hotmart.com/T101665306P?checkoutMode=10&bid=1756654894781"
                 className="w-full"
@@ -436,13 +390,14 @@ export default function LandingPage() {
       </section>
 
       {/* Escassez e Urgência */}
-      <section className="py-16 px-4 bg-white text-primary-foreground">
+      <section className="py-12 sm:py-16 px-4 bg-white text-primary-foreground">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="md:text-4xl font-bold mb-8 text-destructive text-2xl">
+          {/* Headline */}
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 text-destructive">
             🕒 ATENÇÃO, É UMA OPORTUNIDADE INÉDITA
           </h2>
 
-          <div className="mb-8">
+          <div className="mb-6 sm:mb-8">
             <Image
               src="/globo-minha-casa-minha-vida.jpeg"
               alt="Reportagem da Globo sobre nova faixa do Minha Casa Minha Vida até R$ 12 mil por mês"
@@ -450,54 +405,63 @@ export default function LandingPage() {
               height={450}
               className="rounded-lg shadow-lg mx-auto max-w-full h-auto"
               loading="lazy"
-              sizes="(max-width: 768px) 100vw, 800px"
             />
           </div>
 
-          <div className="space-y-4 text-lg text-left md:text-center text-gray-700 mb-8">
-            <p className="text-sm">
-              <strong> Agora é oficial, o Jornal Nacional divulgou:</strong> Famílias com renda de até 12 mil reais, já
+          {/* Contexto Detalhado */}
+          <div className="space-y-4 text-base sm:text-lg text-left md:text-center text-gray-700 mb-6 sm:mb-8">
+            <p>
+              <strong>Agora é oficial, o Jornal Nacional divulgou:</strong> Famílias com renda de até 12 mil reais, já
               podem <strong>financiar a construção da casa própria</strong>, pelo Minha Casa Minha Vida.
             </p>
-            <p className="text-sm">
+            <p>
               👉<strong>Essa é uma oportunidade inédita</strong> e pode ser a sua chance de finalmente construir a casa
               dos seus sonhos, com o crédito da Caixa e a taxa do Minha Casa Minha Vida.
             </p>
-            <p className="text-sm">
+            <p>
               💡 Mas deixa eu ser bem direto com você: <strong>Até quando essa possibilidade irá ficar aberta?</strong>{" "}
               Sinceramente, a gente sabe como nosso país funciona... Essas condições aparecem quando a eleição se
               aproxima, mas somem logo depois.
             </p>
           </div>
 
-          <div className="bg-green-50 border-l-4 border-green-500 rounded-lg p-6 mb-8">
-            <p className="text-lg text-green-900">
-              <strong className="text-sm">
-                {" "}
+          {/* Conexão com a Solução */}
+          <div className="bg-green-50 border-l-4 border-green-500 rounded-lg p-4 sm:p-6 mb-6 sm:mb-8">
+            <p className="text-base sm:text-lg text-green-900">
+              <strong>
                 Então, se você está esperando um sinal, esse é o momento. Porque quem aproveita a oportunidade, SEMPRE
                 garante as melhores condições.
               </strong>
             </p>
           </div>
 
-          <div className="mb-8">
-            <p className="font-semibold text-red-600 text-sm">
-              🚨 Mas vale um alerta, vejo centenas de pessoas deixando pra depois e se arrependendo, pois normalmente quem não aproveita a oportunidade, sempre acaba pagando mais caro ou perdendo a chance. 
+          {/* Mensagem vermelha */}
+          <div className="mb-6 sm:mb-8">
+            <p className="font-semibold text-red-600 text-base sm:text-lg">
+              🚨 Mas vale um alerta, vejo centenas de pessoas deixando pra depois e se arrependendo, pois normalmente
+              quem não aproveita a oportunidade, sempre acaba pagando mais caro ou perdendo a chance única.
             </p>
           </div>
 
-          <CTAButton href="https://pay.hotmart.com/T101665306P?checkoutMode=10&bid=1756654894781">
+          {/* CTA */}
+          <CTAButton
+            href="https://pay.hotmart.com/T101665306P?checkoutMode=10&bid=1756654894781"
+            variant="success"
+            className="w-full sm:w-auto"
+          >
             QUERO APROVEITAR A CHANCE
           </CTAButton>
         </div>
       </section>
 
       {/* FAQ */}
-      <section className="py-16 px-4 bg-muted/30">
+      <section className="py-12 sm:py-16 px-4 bg-muted/30">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-foreground">Perguntas Frequentes</h2>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-8 sm:mb-12 text-foreground">
+            Perguntas Frequentes
+          </h2>
 
-          <Accordion type="single" collapsible className="space-y-4 mb-12">
+          <Accordion type="single" collapsible className="space-y-4 mb-8 sm:mb-12">
             {[
               {
                 question: "E se minha renda não for aprovada?",
@@ -525,10 +489,12 @@ export default function LandingPage() {
               },
             ].map((faq, index) => (
               <AccordionItem key={index} value={`item-${index}`} className="bg-white rounded-lg shadow-sm border">
-                <AccordionTrigger className="px-6 py-4 font-semibold text-card-foreground hover:no-underline text-base">
+                <AccordionTrigger className="px-4 sm:px-6 py-4 font-semibold text-card-foreground hover:no-underline text-sm sm:text-base">
                   {faq.question}
                 </AccordionTrigger>
-                <AccordionContent className="px-6 pb-4 text-muted-foreground">{faq.answer}</AccordionContent>
+                <AccordionContent className="px-4 sm:px-6 pb-4 text-muted-foreground text-sm sm:text-base">
+                  {faq.answer}
+                </AccordionContent>
               </AccordionItem>
             ))}
           </Accordion>
@@ -540,13 +506,13 @@ export default function LandingPage() {
       </section>
 
       {/* CTA Final */}
-      <section className="py-16 px-4 bg-gradient-to-br from-accent to-accent/90 text-accent-foreground">
+      <section className="py-12 sm:py-16 px-4 bg-gradient-to-br from-accent to-accent/90 text-accent-foreground">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-8 text-balance">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 text-balance">
             Agora é a sua vez de sair do aluguel e conquistar a casa dos seus sonhos.
           </h2>
 
-          <div className="mb-8">
+          <div className="mb-6 sm:mb-8">
             <Image
               src="/familia-engenheiro-plantas.jpeg"
               alt="Família trabalhando com engenheiro analisando plantas da casa"
@@ -554,19 +520,20 @@ export default function LandingPage() {
               height={533}
               className="rounded-lg shadow-2xl mx-auto max-w-full h-auto"
               loading="lazy"
-              sizes="(max-width: 768px) 100vw, 800px"
             />
           </div>
 
-          <CTAButton variant="large">QUERO MINHA CASA PRÓPRIA</CTAButton>
+          <CTAButton className="text-lg sm:text-xl py-4 sm:py-6 px-8 sm:px-12">QUERO MINHA CASA PRÓPRIA</CTAButton>
 
-          
+          <p className="mt-6 text-accent-foreground/80 text-sm sm:text-base">
+            ✅ Garantia de 7 dias • ✅ Suporte completo
+          </p>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="py-8 px-4 bg-foreground text-background text-center">
-        <p className="text-sm">© 2025 O Segredo da Construção Financiada. Todos os direitos reservados.</p>
+      <footer className="py-6 sm:py-8 px-4 bg-foreground text-background text-center">
+        <p className="text-xs sm:text-sm">© 2025 O Segredo da Construção Financiada. Todos os direitos reservados.</p>
       </footer>
     </div>
   )
